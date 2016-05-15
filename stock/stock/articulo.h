@@ -10,9 +10,6 @@
 #define articulo_h
 
 
-#endif /* articulo_h */
-
-
 /* Tipo de Estructura Articulo. */
 struct Articulo {
     int codigoArticulo;
@@ -106,3 +103,5 @@ float getPrecioArticulo(Articulo &articulo);
 void setPrecioArticulo(Articulo &articulo, float precio);
 
 //falta descripcion
+
+#endif /* articulo_h */
