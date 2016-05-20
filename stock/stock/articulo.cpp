@@ -26,12 +26,12 @@ void cargarArchivo(const char ruta[]) {
         while (fscanf(fin,"%d;%f", &codigo, &precio) > 0) {
             
             cout << codigo << " "  << precio ;
-            //puedo tener varios constructores y pasar directamente?
-            Articulo articulo;
-            setCodigoArticulo(articulo, codigo);
-            setPrecioArticulo(articulo, precio);
             
-            //
+            Articulo articulo;
+            constructor(articulo, codigo, precio);
+            
+            //insertarEnLista(articulo);
+    
             
         
         }
