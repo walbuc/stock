@@ -1,4 +1,3 @@
-
 #ifndef __COLA_H__
 #define __COLA_H__
 

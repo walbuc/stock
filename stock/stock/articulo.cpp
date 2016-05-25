@@ -11,7 +11,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-
+#include <string>
 
 using namespace std;
 
@@ -23,7 +23,7 @@ void constructor(Articulo &articulo){
 }
 
 
-void destructior(Articulo &articulo){}
+void destructor(Articulo &articulo){}
 
 
 int getCodigoArticulo(Articulo &articulo){
