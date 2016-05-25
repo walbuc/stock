@@ -7,7 +7,9 @@
 //
 
 #include "lista.h"
+#include <string>
 
+using namespace std;
 
 /******************************************************************************/
 /* DefiniciÛn de Tipos de Datos para manejo interno */
@@ -30,7 +32,7 @@ bool listaVacia(Lista &lista) {
 
 /*----------------------------------------------------------------------------*/
 PtrNodoLista fin() {
-    return nullptr;
+    return NULL;
 }
 
 /*----------------------------------------------------------------------------*/

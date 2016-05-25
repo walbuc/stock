@@ -9,6 +9,9 @@
 #ifndef lista_h
 #define lista_h
 
+#ifndef NULL
+#define NULL 0
+#endif
 
 /******************************************************************************/
 /* Definiciones de Tipos de Datos */

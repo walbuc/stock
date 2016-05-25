@@ -8,18 +8,17 @@
 
 #ifndef articulo_h
 #define articulo_h
+#include <string>
 
+using namespace std;
 
 /* Tipo de Estructura Articulo. */
 struct Articulo {
     int codigoArticulo;
     float precio;
-    char descripcion[];
+    string descripcion;
 };
 
-void cargarMaestroDeArtículos();
-
-void cargarArchivo(const char ruta[]);
 
 /**
  PRE:
@@ -45,7 +44,7 @@ void constructor(Articulo &articulo);
  No aplica.
  */
 
-void destructior(Articulo &articulo);
+void destructor(Articulo &articulo);
 
 
 /**
@@ -102,6 +101,32 @@ float getPrecioArticulo(Articulo &articulo);
  */
 void setPrecioArticulo(Articulo &articulo, float precio);
 
-//falta descripcion
+/**
+ PRE:
+ La instancia del TDA (articulo) debe haberse creado (crear) pero no debe estar destruida (destruir).
+ POST:
+ Devuelve el precio del articulo.
+ ATRIBUTOS:
+ articulo: instancia sobre la cual se aplica la primitiva.
+ RETORNO:
+ Devuelve el precio del articulo.
+ */
+string getDescripcionArticulo(Articulo &articulo);
+
+
+/**
+ PRE:
+ La instancia del TDA (articulo) debe haberse creado (crear) pero no debe estar destruida (destruir).
+ El codigo debe ser mayor o igual a cero.
+ POST:
+ El articulo queda con el nuevo precio.
+ ATRIBUTOS:
+ articulo: instancia sobre la cual se aplica la primitiva.
+ precio: valor del codigo a asignar al articulo.
+ RETORNO:
+ No aplica.
+ */
+void setDescripcionArticulo(Articulo &articulo, string descripcion);
+
 
 #endif /* articulo_h */

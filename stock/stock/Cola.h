@@ -1,9 +1,9 @@
-Cola.h
+
 #ifndef __COLA_H__
 #define __COLA_H__
 
 #ifndef NULL
-#define NULL      0
+#define NULL 0
 #endif
 
 /******************************************************************************/

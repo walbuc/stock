@@ -7,12 +7,18 @@
 //
 
 #include <iostream>
-#include "articulo.h"
+#include "AdminArticulos.h"
+#include "lista.h"
+#include "funciones.h"
 using namespace std;
 
 int main(int argc, const char * argv[]) {
     
-    cargarMaestroDeArtículos();
+    
+    Lista listaArticulo;
+    crearLista(listaArticulo, &compararDatoArticulo);
+    
+    cargarMaestroDeArticulos(listaArticulo);
     
     
     
