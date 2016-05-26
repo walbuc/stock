@@ -6,10 +6,11 @@
 //  Copyright © 2016 Walter Buczacka. All rights reserved.
 //
 
-#include <stdio.h>
+
 #include "funciones.h"
 #include "lista.h"
 #include "articulo.h"
+#include "estanteria.h"
 using namespace std;
 
 ResultadoComparacion compararDatoArticulo(PtrDato ptrDato1, PtrDato ptrDato2) {
@@ -24,6 +25,38 @@ ResultadoComparacion compararDatoArticulo(PtrDato ptrDato1, PtrDato ptrDato2) {
         return IGUAL;
     }
 }
+
+ResultadoComparacion compararDatoEstanteria(PtrDato ptrDato1, PtrDato ptrDato2) {
+    if ( ((Estanteria*)ptrDato1)->nroCalle > ((Estanteria*)ptrDato2)->nroCalle ) {
+        return MAYOR;
+    }
+    else if (((Estanteria*)ptrDato1)->nroCalle < ((Estanteria*)ptrDato2)->nroCalle) {
+        return MENOR;
+    }
+    else {
+        return IGUAL;
+    }
+}
+
+ResultadoComparacion compararDatoPiso(PtrDato ptrDato1, PtrDato ptrDato2) {
+    if ( ((Piso*)ptrDato1)->nroPiso > ((Piso*)ptrDato2)->nroPiso ) {
+        return MAYOR;
+    }
+    else if (((Piso*)ptrDato1)->nroPiso < ((Piso*)ptrDato2)->nroPiso) {
+        return MENOR;
+    }
+    else {
+        return IGUAL;
+    }
+}
+
+
+
+
+
+
+
+
 
 
 //////////////////////////////////////////////
