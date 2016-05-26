@@ -59,7 +59,7 @@ void cargarArticulos(Lista &listaArticulos){
 }
 
 
-void cargarMaestroDeArticulos(Lista &listaArticulos) {
+void cargarMaestroDeArticulos(Lista &listaArticulos, Lista &listaIndice) {
     
     cargarArticulos(listaArticulos);
     

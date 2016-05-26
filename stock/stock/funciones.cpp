@@ -11,6 +11,7 @@
 #include "lista.h"
 #include "articulo.h"
 using namespace std;
+
 ResultadoComparacion compararDatoArticulo(PtrDato ptrDato1, PtrDato ptrDato2) {
     
     if ( (*(Articulo*)ptrDato1).codigoArticulo > (*(Articulo*)ptrDato2).codigoArticulo ) {

@@ -19,6 +19,11 @@ struct Articulo {
     string descripcion;
 };
 
+/* Tipo de Estructura Indice. */
+struct Indice {
+    int codigoArticulo;
+    int c, p, u;
+};
 
 /**
  PRE:

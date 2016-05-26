@@ -18,6 +18,6 @@
 void cargarArticulos(Lista &listaArticulos);
 
 
-void cargarMaestroDeArticulos(Lista &listaArticulos);
+void cargarMaestroDeArticulos(Lista &listaArticulos, Lista &listaIndice);
 
 #endif /* AdminArticulos_h */

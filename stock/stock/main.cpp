@@ -16,9 +16,11 @@ int main(int argc, const char * argv[]) {
     
     
     Lista listaArticulo;
+    Lista listaIndice;
+    
     crearLista(listaArticulo, &compararDatoArticulo);
     
-    cargarMaestroDeArticulos(listaArticulo);
+    cargarMaestroDeArticulos(listaArticulo, listaIndice);
     
     
     
