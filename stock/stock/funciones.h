@@ -9,7 +9,9 @@
 #ifndef funciones_h
 #define funciones_h
 
+#include "articulo.h"
 #include "lista.h"
+#include "estanteria.h"
 #include <string>
 #include <iostream>
 #include <string>
@@ -17,6 +19,10 @@
 using namespace std;
 
 ResultadoComparacion compararDatoArticulo(PtrDato ptrDato1, PtrDato ptrDato2);
+
+ResultadoComparacion compararDatoEstanteria(PtrDato ptrDato1, PtrDato ptrDato2);
+
+ResultadoComparacion compararDatoPiso(PtrDato ptrDato1, PtrDato ptrDato2);
 
 int cadenaAentero(string dato);
 
