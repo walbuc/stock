@@ -3,11 +3,11 @@
 //  stock
 //
 //  Created by Sandra Gargiulo on 5/22/16.
-//  Copyright © 2016 Sandra Gargiulo. All rights reserved.
+//  Copyright Â© 2016 Sandra Gargiulo. All rights reserved.
 //
 
-#ifndef solicitud_h
-#define solicitud_h
+#ifndef Solicitud_h
+#define Solicitud_h
 
 
 /* Tipo de Estructura solicitud. */
@@ -18,7 +18,6 @@ struct Solicitud {
 	string hora;
 } solicitud;
 
-void cargarArchivo(const char ruta[]);
 
 /**
  PRE:
@@ -163,19 +162,6 @@ string getHoraSolicitud(Solicitud &solicitud);
  */
 void setHoraSolicitud(Solicitud &solicitud, string hora);
 
-/* verifica el stock de un determinado articulo*/
-bool existeArticulo();
 
-/*verifica la existencia del articulo*/
-bool existeStockArticulo();
-
-/* si el articulo no cumple con la totalidad o la parcialidad
-de las 2 condiciones anteriores,
-carga el articulo en la cola de articulos pendientes */
-void agregarPendiente();
-
-/* en caso contrario,
-carga el articulo en la lista de pedido */
-void agregarSolicitud();
 
 #endif /* solicitud_h */
