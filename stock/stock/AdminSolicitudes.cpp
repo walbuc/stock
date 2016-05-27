@@ -1,10 +1,3 @@
-//
-//  AdminArticulos.cpp
-//  stock
-//
-//  Created by Walter Buczacka on 5/23/16.
-//  Copyright © 2016 Walter Buczacka. All rights reserved.
-//
 
 #include <stdio.h>
 #include "AdminSolicitudes.h"
