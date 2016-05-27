@@ -18,7 +18,7 @@ void cargarArticulos(Lista &listaArticulos){
     ifstream farticulos;
     string dato;
     
-    farticulos.open("articulos.db");
+    farticulos.open("/Users/walter/Documents/personal-repositories/stock/stock/stock/articulos.db");
     
     if (farticulos.is_open()){
 

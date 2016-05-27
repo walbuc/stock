@@ -1,6 +1,5 @@
 #include "Pila.h"
 
-using namespace std;
 
 /******************************************************************************/
 /* Funciones auxiliares */
