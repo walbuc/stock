@@ -1,4 +1,4 @@
-#include <cstdlib>;
+include <cstdlib>;
 #include <iostream>;
 #include <string>;
 #include <stdio>
@@ -13,39 +13,6 @@ using namespace std;
 #define NULL 0
 #endif
 
-
-void cargarArchivo(const char ruta[])
-{
-	Sucursal codigoSucursal;
-	Articulo codigoArticulo;
-	float cantidad;
-	string hora;
-
-    FILE *f = fopen(ruta, "r");
-    
-    if (f != NULL) {
-        while (fscanf(fin,"%d;%f", &codigoSucursal, &codigoArticulo, &cantidad, &hora) > 0) {
-            
-            cout << codigoSucursal << " "  << codigoArticulo << " "  << cantidad << " "  << hora;
-            
-			Solicitud solicitud;
-            constructor(solicitud, codigoSucursal, codigoArticulo, cantidad, hora);
-		}
-        
-		fclose(fin);
-    } 
-	
-	else
-    {  
-        cout << "No se puede abrir el archivo";
-    }
-
-}
-
-void cargarSolicitudes() {
-    const char ruta[] = "/Users/walter/Documents/personal-repositories/stock/stock/stock/solicitudes.db";
-    cargarArchivo(ruta);
-}
 
 void constructor(Solicitud &solicitud)
 {
@@ -105,23 +72,6 @@ string getHoraSolicitud(Solicitud &solicitud)
 
 void setHoraSolicitud(Solicitud &solicitud, string hora)
 {
-		solicitud.hora = hora;
+	// debo validar el string para dar robustez
+	solicitud.hora = hora;
 }
-
-
-bool existeArticulo()
-{
-
-}
-
-/*verifica la existencia del articulo*/
-bool existeStockArticulo();
-
-/* si el articulo no cumple con la totalidad o la parcialidad
-de las 2 condiciones anteriores,
-carga el articulo en la cola de articulos pendientes */
-void agregarPendiente();
-
-/* en caso contrario,
-carga el articulo en la lista de pedido */
-void agregarSolicitud();
