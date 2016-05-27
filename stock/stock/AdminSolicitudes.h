@@ -4,6 +4,7 @@
 #define AdminSolicitudes_h
 
 #include "lista.h"
+//#inlcude "cola.h"
 #include "solicitud.h"
 #include "funciones.h"
 
