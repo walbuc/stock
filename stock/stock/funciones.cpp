@@ -50,7 +50,18 @@ ResultadoComparacion compararDatoPiso(PtrDato ptrDato1, PtrDato ptrDato2) {
     }
 }
 
+ResultadoComparacion compararDatoUbicacion(PtrDato ptrDato1, PtrDato ptrDato2) {
+    if ( ((Ubicacion*)ptrDato1)->nroUbicacion > ((Ubicacion*)ptrDato2)->nroUbicacion ) {
+        return MAYOR;
+    }
+    else if (((Ubicacion*)ptrDato1)->nroUbicacion < ((Ubicacion*)ptrDato2)->nroUbicacion) {
+        return MENOR;
+    }
+    else {
 
+  return IGUAL;
+    }
+}
 
 
 
