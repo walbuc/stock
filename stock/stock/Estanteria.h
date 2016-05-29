@@ -1,31 +1,23 @@
 #ifndef ESTANTERIA_H
 #define ESTANTERIA_H
+
+
+#include "Articulo.h"
+#include "Ubicacion.h"
+#include "Piso.h"
 #include "Lista.h"
 #include "Pila.h"
-#include "Articulo.h"
 
-/** Definicion de las estructuras**/
-struct Ubicacion{
-    int nroUbicacion;
-    Articulo articulo;
 
-};
-struct Piso{
-    int nroPiso;
-    Pila pilaUbicacion;
+typedef struct{
 
-};
+    int nroCalle;
+    int cPisos;
+    int cUbicaciones;
+    float kc;
+    Lista listaPisos;
 
-struct Estanteria{
-int nroCalle;
-
-int cPisos;
-int cUbicaciones;
-float kc;
-
-Lista listaPiso;
-
-};
+}  Estanteria;
 
 /**
 CONSTRUIR_ESTANTERIA
@@ -217,8 +209,8 @@ void crearPiso(Estanteria &estanteria, int nroPiso);
  RETORNO:
  No aplica. Solo se crea la ubicacion.
  **/
-void crearUbicacion(Estanteria &estanteria, int nroUbicacion, Articulo &articulo);
 
+ void crearUbicacion(Estanteria &estanteria, int nroUbicacion, Articulo &articulo);
 
 
 
