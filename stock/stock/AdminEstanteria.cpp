@@ -57,7 +57,7 @@ void configurarEstanteria(Estanteria &estanteria){
 
 
 
-void imprimirUbicacion(Ubicacion ubicacion){
+void imprimirUbicacion(Ubicacion &ubicacion){
 
     Articulo articulo;
     constructor(articulo);
@@ -66,51 +66,62 @@ void imprimirUbicacion(Ubicacion ubicacion){
 
     cout<<"------------------------"<<endl;
     cout<< "Nro de Ubicacion: " << ubicacion.nroUbicacion<<endl;
-    cout<< "Nro de Articulo" << articulo.codigoArticulo<<endl;
+    cout<< "Nro de Articulo: " << articulo.codigoArticulo<<endl;
     cout<<"------------------------"<<endl;
 
 
 }
 
 
-void estadoUbicacion (Pila &pilaUbicacion, int piso){
+void estadoUbicacion (Lista &listaUbicacion, int piso){
 
-   cout<<"Piso Nro: "<< piso<< endl;
+    cout<<"ESTADO UBICACION, LONGITUD LISTA: "<<longitud(listaUbicacion)<<endl;
+     PtrNodoLista ptrNodoListaUbicacion;
+     cout<<"PISO NRO: "<< piso<<endl;
 
-   while(pilaVacia(pilaUbicacion)!=true){
-
-        Ubicacion* ptrUbicacion;
-        ptrUbicacion=((Ubicacion*)sacar(pilaUbicacion));
-
-        imprimirUbicacion(*ptrUbicacion);
-
-   }
-
-
-}
-
-void estadoPiso(Lista &listaPiso){
-
-    PtrNodoLista ptrNodoListaPiso;
-
-    for(int i = 0; i<longitud(listaPiso); i++){
+    for(int i = 0; i<longitud(listaUbicacion); i++){
 
         if(i==0){
+            ptrNodoListaUbicacion= primero(listaUbicacion);
+            Ubicacion* ptrUbicacion = (Ubicacion*)ptrNodoListaUbicacion->ptrDato;
+            Ubicacion ubicacion= *ptrUbicacion;
+            imprimirUbicacion(ubicacion);
+        }
+        else {
+            PtrNodoLista ptrNodoListaSiguiente = siguiente(listaUbicacion, ptrNodoListaUbicacion);
+            Ubicacion* ptrSiguiente = (Ubicacion*) ptrNodoListaSiguiente->ptrDato;
+            Ubicacion siguiente = *ptrSiguiente;
+            imprimirUbicacion(siguiente);
+            ptrNodoListaUbicacion = ptrNodoListaSiguiente;
+
+        }
+
+    }
+
+
+
+}/**hacer de nuevo el recorrido*/
+
+void estadoPiso(Lista &listaPiso){
+    cout<<"ESTADO PISO, LONGITUD LISTA_PISO: "<<longitud(listaPiso)<<endl;
+    PtrNodoLista ptrNodoListaPiso;
+   // Piso piso;
+    //construirPiso(piso);
+    Lista auxListaUbicacion;
+    crearLista(auxListaUbicacion,compararDatoUbicacion);
+
+    for(int i = 1; i<=longitud(listaPiso); i++){
+
+        if(i==1){
             ptrNodoListaPiso= primero(listaPiso);
             Piso* ptrPiso = (Piso*)ptrNodoListaPiso->ptrDato;
-            Piso piso= *ptrPiso;
-            Pila auxPila;
-            auxPila= piso.pilaUbicacion;
-            estadoUbicacion(auxPila, i);
+            cout<<longitud(ptrPiso->listaUbicacion)<<endl;
+            estadoUbicacion(ptrPiso->listaUbicacion, ptrPiso->nroPiso);
         }
         else {
             PtrNodoLista ptrNodoListaSiguiente = siguiente(listaPiso, ptrNodoListaPiso);
             Piso* ptrSiguiente = (Piso*) ptrNodoListaSiguiente->ptrDato;
-            Piso siguiente = *ptrSiguiente;
-            Pila auxPila;
-            auxPila= siguiente.pilaUbicacion;
-
-            estadoUbicacion(auxPila, i);
+            estadoUbicacion(ptrSiguiente->listaUbicacion, ptrSiguiente->nroPiso);
 
             ptrNodoListaPiso = ptrNodoListaSiguiente;
 
@@ -133,6 +144,16 @@ void imprimirEstanteria(Estanteria &estanteria){
     cout<<"cantidad de pisos: " << getCPisos(estanteria)<<endl;
     cout<<"cantidad de ubicaciones: " << getCUbicaciones(estanteria)<<endl;
     cout<<"Kilos por Camión: "<< getKc(estanteria)<<endl;
+
+    Lista lista;
+    crearLista(lista,compararDatoPiso);
+
+    lista= getListaPisos(estanteria);
+    //cout<<"cantidad "<< longitud(lista)<<endl;
+
+    estadoPiso(lista);
+
+
 
 
     }
