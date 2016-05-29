@@ -18,3 +18,5 @@
 void leerArchivosOperaciones();
 
 int compararHoras(int hora, int minuto, int segundo, int hora1, int minuto1, int segundo1);
+
+void procesarIngreso();
