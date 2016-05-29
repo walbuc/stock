@@ -1,4 +1,5 @@
 #include "Estanteria.h"
+#include "AdminEstanteria.h"
 #include "Funciones.h"
 
 #include <fstream>
@@ -30,8 +31,10 @@ void construirEstanteria (Estanteria &estanteria){
 
      Lista auxLista;
      crearLista(auxLista,compararDatoPiso);
+     setListaPisos(estanteria,auxLista);
+     auxLista= getListaPisos(estanteria);
+     cout<<"constructor estanteria "<<longitud(auxLista)<<endl;//lo tengo para ver si crea la lista vacia
 
-     estanteria.listaPiso=auxLista;
 }
 
 
@@ -179,7 +182,7 @@ void setCPisos(Estanteria &estanteria, int cPisos){
  Devuelve Lista de Pisos.
  **/
 Lista getListaPisos(Estanteria &estanteria){
-    return estanteria.listaPiso;
+    return estanteria.listaPisos;
  }
 
 
@@ -194,7 +197,7 @@ Lista getListaPisos(Estanteria &estanteria){
  Asigna lista pasada por parametro.
  **/
  void setListaPisos(Estanteria &estanteria, Lista listaPisos){
-    estanteria.listaPiso= listaPisos;
+    estanteria.listaPisos= listaPisos;
  }
 
 
@@ -210,34 +213,29 @@ Lista getListaPisos(Estanteria &estanteria){
  No aplica. Solo se crea un piso con los parametros pasados.
  **/
  void crearPiso(Estanteria &estanteria, int nroPiso){
-    //pila vacia
-    Pila auxPila;
-    crearPila(auxPila);
+    //Piso a Crear
+    Piso piso;
+    construirPiso(piso);
+    piso.nroPiso=nroPiso;
 
-    //crear auxiliar para el piso
-     Piso auxPiso;
-     auxPiso.nroPiso=nroPiso;
-     auxPiso.pilaUbicacion=auxPila;
+    //Crear lista auxiliar para los pisos
+    Lista auxLista;
+    crearLista(auxLista, compararDatoPiso);
+    auxLista= getListaPisos(estanteria);
 
+    //revisa si esta vacia la lista para adicionar al principio o al final
+    if (listaVacia(auxLista)){
+        adicionarPrincipio(auxLista, &piso);
+        cout<<"piso nro "<< piso.nroPiso<<endl;
+        setListaPisos(estanteria,auxLista);
+         }
+         else {
+            adicionarFinal(auxLista, &piso);
+            cout<<"final"<<piso.nroPiso<<endl;
+            setListaPisos(estanteria,auxLista);
+         }
 
-
-     Lista auxLista;
-     crearLista(auxLista, compararDatoPiso);
-     //Lista* ptrListaPiso;
-
-     //ptrListaPiso= (Lista*)getListaPisos(estanteria);
-
-     auxLista= getListaPisos(estanteria);
-
-
-
-     //adicionamos el piso a la lista de pisos de la estanteria.
-     adicionarFinal(auxLista, &auxPiso);
-     //terminanos de sobrescribir la lista que nos creamos a la estanteria pasada por parametro
-     setListaPisos(estanteria,auxLista);
-
-
- }
+    }
 
 
 /**
@@ -254,42 +252,64 @@ Lista getListaPisos(Estanteria &estanteria){
  **/
 void crearUbicacion(Estanteria &estanteria, int nroUbicacion, Articulo &articulo){
 
-     //crea el auxiliar de ubicacion
-     Ubicacion auxUbicacion;
-     //Asigna los valores pasados por parametro y el articulo
-     auxUbicacion.nroUbicacion= nroUbicacion;
-     auxUbicacion.articulo= articulo;
+    /*crea ubicacion para apilar*/
+    Ubicacion ubicacion;
+    construirUbicacion(ubicacion);
+    setNroUbicacion(ubicacion, nroUbicacion);
+    setArticulo(ubicacion, articulo);
 
-     // auxiliar de piso
-     Piso auxPiso;
+    Lista auxListaPisos;
+    crearLista(auxListaPisos, compararDatoPiso);
+    auxListaPisos=getListaPisos(estanteria);
 
-     //creamos puntero auxiliar
+    cout<<"longitud auxListaPisos: "<<longitud(auxListaPisos)<<endl;
 
-     Piso* ptrPiso;
 
-     //sacamos el ultimo piso creado
-     Lista auxLista;
-     crearLista(auxLista, compararDatoPiso);
-     auxLista= getListaPisos(estanteria);
-     ptrPiso= (Piso*)ultimo(auxLista) ;
+    /*saco el ultimo piso creado de la lista*/
+    if (longitud(auxListaPisos)==1){
+        Piso* ptrPiso = (Piso*)primero(auxListaPisos)->ptrDato;
+         cout<<"longitud auxListaUbicacion: "<<longitud(ptrPiso->listaUbicacion)<<endl;
 
-     //guarda el piso que apunta el puntero
-     auxPiso= *ptrPiso;
+        if (listaVacia(ptrPiso->listaUbicacion)){
+            adicionarPrincipio(ptrPiso->listaUbicacion,&ubicacion);
+            cout<<"principio100"<<endl;
 
-     //creamos pila auxiliar
-     Pila auxPila;
-     crearPila(auxPila);
-     //guardamos la pila del piso en el auxiliar
-     auxPila= auxPiso.pilaUbicacion;
 
-     //agregamos la ubicacion creada
-     agregar(auxPila, &auxUbicacion);
 
-     //pisamos la pila del piso auxiliar
-     auxPiso.pilaUbicacion=auxPila;
+            }
+        else{
+            adicionarFinal(ptrPiso->listaUbicacion,&ubicacion);
+            cout<<"final"<<endl;
 
-     //volvemos a guardar el piso en la direccion del puntero
-     *ptrPiso= auxPiso;
+        }
+       }
+    else{
+        Piso* ptrPiso = (Piso*)ultimo(auxListaPisos)->ptrDato;
+        //Piso piso= *ptrPiso;
 
-   }
+        if (listaVacia(ptrPiso->listaUbicacion)){
+            adicionarPrincipio(ptrPiso->listaUbicacion,&ubicacion);
+            cout<<"principio"<<endl;
+             //*ptrPiso= piso;
+            //  setListaPisos(estanteria,auxListaPisos);
+
+        }
+        else{
+            adicionarFinal(ptrPiso->listaUbicacion,&ubicacion);
+            cout<<"final"<<endl;
+             //*ptrPiso= piso;
+           //   setListaPisos(estanteria,auxListaPisos);
+
+            }
+    }
+
+
+
+
+
+
+}
+
+
+
 
