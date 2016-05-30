@@ -12,9 +12,6 @@
 typedef struct{
 
     int nroCalle;
-    int cPisos;
-    int cUbicaciones;
-    float kc;
     Lista listaPisos;
 
 }  Estanteria;
@@ -30,7 +27,7 @@ CONSTRUIR_ESTANTERIA
  RETORNO:
  No aplica.
  **/
- void construirEstanteria (Estanteria &estanteria);
+ PtrDato construirEstanteria (Estanteria &estanteria);
 
 
 /**
@@ -72,89 +69,6 @@ DESTRUIR_ESTANTERIA
  **/
  void setNroCalle(Estanteria &estanteria, int nro);
 
-
-/**
- GET_cPisos
- PRE:
- La instancia del TDA (estanteria) debe haberse creado (crear) ni destruido (destruir) con anterioridad.
- POST:Devuelve el numero cantidad de pisos.
- ATRIBUTOS:
- Estanteria: instancia sobre la cual se aplica la primitiva.
- RETORNO:
- Devuelve el numero de cPisos..
- **/
-int getCPisos(Estanteria &estanteria);
-
-
- /**
- SET_cPisos
- PRE:
- La instancia del TDA (estanteria) debe haberse creado (crear) ni destruido (destruir) con anterioridad.
- POST:Cambia el numero de calle.
- ATRIBUTOS:
- Estanteria: instancia sobre la cual se aplica la primitiva.
- cPisos: cantidad de pisos. TOPE.
- RETORNO:
- no aplica.
- **/
-void setCPisos(Estanteria &estanteria, int cPisos);
-
-
-/**
- GET_cUbicaciones
- PRE:
- La instancia del TDA (estanteria) debe haberse creado (crear) ni destruido (destruir) con anterioridad.
- POST:Devuelve el numero de Ubicaciones.
- ATRIBUTOS:
- Estanteria: instancia sobre la cual se aplica la primitiva.
- RETORNO:
- Devuelve el numero de cUbicaciones..
- **/
- int getCUbicaciones(Estanteria &estanteria);
-
-
- /**
- SET_cUbicaciones
- PRE:
- La instancia del TDA (estanteria) debe haberse creado (crear) ni destruido (destruir) con anterioridad.
- POST:Cambia el numero de cantidad de ubicaciones. TOPE
- ATRIBUTOS:
- Estanteria: instancia sobre la cual se aplica la primitiva.
- cUbicaciones
- RETORNO:
- no aplica.
- **/
- void setCUbicaciones(Estanteria &estanteria, int cUbicaciones);
-
-
-
- /**
- GET_KC
- PRE:
- La instancia del TDA (estanteria) debe haberse creado (crear) ni destruido (destruir) con anterioridad.
- POST:Devuelve el numero de kc. Kilos por camion
- ATRIBUTOS:
- Estanteria: instancia sobre la cual se aplica la primitiva.
- RETORNO:
- Devuelve el numero de kc..
- **/
- float getKc (Estanteria &estanteria);
-
-
- /**
- SET_KC
- PRE:
- La instancia del TDA (estanteria) debe haberse creado (crear) ni destruido (destruir) con anterioridad.
- POST:Devuelve el numero de calle.
- ATRIBUTOS:
- Estanteria: instancia sobre la cual se aplica la primitiva.
- kc: numero a setear en KC.
- RETORNO:
- No aplica.
- **/
- void setKc(Estanteria &estanteria, float kc);
-
-
  /**
  GET_LISTA_PISOS
  PRE:
@@ -163,9 +77,9 @@ void setCPisos(Estanteria &estanteria, int cPisos);
  ATRIBUTOS:
  Estanteria: instancia sobre la cual se aplica la primitiva.
  RETORNO:
- Devuelve Lista de Pisos.
+ Devuelve Ptrdato Lista de Pisos.
  **/
-Lista getListaPisos(Estanteria &estanteria);
+PtrDato getListaPisos(Estanteria &estanteria);
 
 
  /**
@@ -193,7 +107,7 @@ void setListaPisos(Estanteria &estanteria, Lista listaPisos);
  RETORNO:
  No aplica. Solo se crea un piso con los parametros pasados.
  **/
-void crearPiso(Estanteria &estanteria, int nroPiso);
+void crearPiso(Lista &listaPisos, int nroPiso);
 
 
 
@@ -210,7 +124,10 @@ void crearPiso(Estanteria &estanteria, int nroPiso);
  No aplica. Solo se crea la ubicacion.
  **/
 
- void crearUbicacion(Estanteria &estanteria, int nroUbicacion, Articulo &articulo);
+ void crearUbicacion(Lista &listaUbicacion, int nroUbicacion, Articulo &articulo);
+
+ /**************************************************************/
+ void crearEstanteria(Lista &listaEstanteria, int nroCalle);
 
 
 
