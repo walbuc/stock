@@ -121,8 +121,8 @@ void setCPisos(Deposito &deposito, int cPisos){
  Devuelve Lista de Pisos.
  **/
 
- PtrDato getListaEstanteria(Deposito &deposito){
-    return &deposito.listaEstanteria;
+ Lista& getListaEstanteria(Deposito &deposito){
+    return deposito.listaEstanteria;
  }
 
 

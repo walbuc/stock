@@ -27,7 +27,7 @@ CONSTRUIR_ESTANTERIA
  RETORNO:
  No aplica.
  **/
- PtrDato construirEstanteria (Estanteria &estanteria);
+ void construirEstanteria (Estanteria &estanteria);
 
 
 /**
@@ -107,7 +107,7 @@ void setListaPisos(Estanteria &estanteria, Lista listaPisos);
  RETORNO:
  No aplica. Solo se crea un piso con los parametros pasados.
  **/
-void crearPiso(Lista &listaPisos, int nroPiso);
+PtrNodoLista crearPiso(Lista &listaPisos, int nroPiso);
 
 
 
@@ -124,10 +124,10 @@ void crearPiso(Lista &listaPisos, int nroPiso);
  No aplica. Solo se crea la ubicacion.
  **/
 
- void crearUbicacion(Lista &listaUbicacion, int nroUbicacion, Articulo &articulo);
+ PtrNodoLista crearUbicacion(Lista &listaUbicacion, int nroUbicacion, Articulo &articulo);
 
  /**************************************************************/
- void crearEstanteria(Lista &listaEstanteria, int nroCalle);
+ PtrNodoLista crearEstanteria(Lista &listaEstanteria, int nroCalle);
 
 
 

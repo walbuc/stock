@@ -10,7 +10,7 @@ typedef struct {
 
 }Ubicacion;
 
-PtrDato construirUbicacion(Ubicacion &ubicacion);
+void construirUbicacion(Ubicacion &ubicacion);
 
 int getNroUbicacion(Ubicacion &ubicacion);
 

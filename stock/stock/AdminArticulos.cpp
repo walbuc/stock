@@ -59,9 +59,39 @@ void cargarArticulos(Lista &listaArticulos){
 }
 
 
-void cargarMaestroDeArticulos(Lista &listaArticulos, Lista &listaIndice) {
+void cargarMaestroDeArticulos(Deposito &deposito, Lista &listaArticulos, Lista &listaIndice) {
     
     cargarArticulos(listaArticulos);
     
+    PtrNodoLista cursor = primero(listaArticulos);
+    //estadoListaArticulos(listaArticulos);
+    int i = 0;
     
+    while (cursor != fin()){
+        i++;
+        
+        PtrNodoLista ptrNodoEstanteria = crearEstanteria(getListaEstanteria(deposito), i);
+        
+        crearPiso(<#Lista &listaPisos#>, <#int nroPiso#>)
+        cursor = siguiente(listaArticulos, cursor);
+        
+        
+    }
+    
+}
+
+
+void estadoListaArticulos(Lista &listaArticulos){
+    
+    PtrNodoLista cursor = primero(listaArticulos);
+    
+    while (cursor != fin()){
+        
+        int codigoArticulo = getCodigoArticulo(*((Articulo*)cursor->ptrDato));
+        cout<<"------------------------------------------------"<<endl;
+        cout<<"Nro.de de codigo de articulo: "<<codigoArticulo<<endl;
+        cout<<"------------------------------------------------"<<endl;
+        cursor=siguiente(listaArticulos,cursor);
+        
+    }
 }

@@ -13,7 +13,7 @@ typedef struct{
 
 /*funciones extras*/
 
-PtrDato construirPiso(Piso &piso);
+void construirPiso(Piso &piso);
 
 int getNroPisos(Piso &piso);
 

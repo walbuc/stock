@@ -73,5 +73,4 @@ void estadoEstanteria(Lista &listaEstanteria){
         cursor=siguiente(listaEstanteria,cursor);
 
     }
-
-    }
+}

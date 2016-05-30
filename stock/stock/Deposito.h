@@ -110,7 +110,7 @@ void setCPisos(Deposito &deposito, int cPisos);
  Devuelve Ptrdato Lista de Pisos.
  **/
 
- PtrDato getListaEstanteria(Deposito &deposito);
+ Lista& getListaEstanteria(Deposito &deposito);
 
 
  /**

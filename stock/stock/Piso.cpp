@@ -2,15 +2,11 @@
 #include "AdminEstanteria.h"
 #include "Funciones.h"
 
-PtrDato construirPiso(Piso &piso){
-
-    PtrDato puntero= new Piso;
+void construirPiso(Piso &piso){
     piso.nroPiso=0;
     Lista listaUbicacion;
     crearLista(listaUbicacion,&compararDatoUbicacion);
     piso.listaUbicacion=listaUbicacion;
-
-    return puntero;
 }
 
 int getNroPisos(Piso &piso){

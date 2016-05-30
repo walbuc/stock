@@ -19,16 +19,12 @@ using namespace std;
  RETORNO:
  No aplica.
  **/
-PtrDato construirEstanteria (Estanteria &estanteria){
-
-     PtrDato puntero= new Estanteria();
+void construirEstanteria (Estanteria &estanteria){
      estanteria.nroCalle=0;
      /*Setea la listaPisos, Ubicacion no tendria, no sería necesario inicializar*/
      Lista auxLista;
      crearLista(auxLista,&compararDatoPiso);
      estanteria.listaPisos=auxLista;
-
-return puntero;
 }
 
 /**
@@ -114,12 +110,12 @@ PtrDato getListaPisos(Estanteria &estanteria){
  **/
 
 
- void crearPiso(Lista &listaPisos, int nroPiso){
-    //Piso a Crear
-    Piso piso;
-    PtrDato ptrDato= construirPiso(piso);
-    setNroPisos(*((Piso*)ptrDato),nroPiso);
-    adicionarFinal(listaPisos,ptrDato);
+PtrNodoLista crearPiso(Lista &listaPisos, int nroPiso){
+    Piso* punteroPiso = new Piso();
+    construirPiso(*punteroPiso);
+    setNroPisos(*punteroPiso, nroPiso);
+    PtrNodoLista prtNodo = adicionarFinal(listaPisos, punteroPiso);
+     return prtNodo;
    }
 
 /**
@@ -134,25 +130,28 @@ PtrDato getListaPisos(Estanteria &estanteria){
  RETORNO:
  No aplica. Solo se crea la ubicacion.
  **/
-void crearUbicacion(Lista &listaUbicacion, int nroUbicacion, Articulo &articulo){
+PtrNodoLista crearUbicacion(Lista &listaUbicacion, int nroUbicacion, Articulo &articulo){
 
-    Ubicacion ubicacion;
-    PtrDato ptrDato= construirUbicacion(ubicacion);
-
-    setNroUbicacion(*((Ubicacion*)ptrDato),nroUbicacion);
-    setArticulo(*((Ubicacion*)ptrDato),articulo);
-    adicionarFinal(listaUbicacion, ptrDato);
-
+    Ubicacion* punteroUbicacion = new Ubicacion();
+    construirUbicacion(*punteroUbicacion);
+    
+    setNroUbicacion(*punteroUbicacion, nroUbicacion);
+    setArticulo(*punteroUbicacion, articulo);
+    
+    PtrNodoLista ptrNodo = adicionarFinal(listaUbicacion, punteroUbicacion);
+    return ptrNodo;
+    
     }
 
-void crearEstanteria(Lista &listaEstanteria, int nroCalle){
+PtrNodoLista crearEstanteria(Lista &listaEstanteria, int nroCalle){
+    
+    Estanteria* punteroEstanteria = new Estanteria();
+    construirEstanteria(*punteroEstanteria);
+    setNroCalle(*punteroEstanteria, nroCalle);
+    
+    PtrNodoLista prtNodo = adicionarFinal(listaEstanteria, punteroEstanteria);
 
-    Estanteria estanteria;
-    PtrDato ptrDato= construirEstanteria(estanteria);
-    setNroCalle(*((Estanteria*)ptrDato),nroCalle);
-    adicionarFinal(listaEstanteria,ptrDato);
-
-
+    return prtNodo;
 
 }
 

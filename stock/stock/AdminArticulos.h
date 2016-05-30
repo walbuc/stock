@@ -12,12 +12,16 @@
 #include "lista.h"
 #include "articulo.h"
 #include "funciones.h"
+#include "Deposito.h"
 
 
 
 void cargarArticulos(Lista &listaArticulos);
 
 
-void cargarMaestroDeArticulos(Lista &listaArticulos, Lista &listaIndice);
+void cargarMaestroDeArticulos(Deposito &deposito, Lista &listaArticulos, Lista &listaIndice);
+
+
+void estadoListaArticulos(Lista &listaArticulos);
 
 #endif /* AdminArticulos_h */
