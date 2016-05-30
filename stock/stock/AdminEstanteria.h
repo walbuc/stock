@@ -9,19 +9,13 @@
 #include "Ubicacion.h"
 #include "Piso.h"
 
-void configurarEstanteria(Estanteria &estanteria);
+void estadoUbicaciones(Lista &listaUbicacion);
 
-void estadoUbicacion(Lista &listaUbicacion, int piso);
-
-void estadoPiso(Lista &listaPiso);
+void estadoPisos(Lista &listaPiso);
 
 void imprimirUbicacion(Ubicacion &ubicacion);
 
-void imprimirEstanteria(Estanteria &estanteria);
-
-
-
-
+void estadoEstanteria(Lista &listaEstanteria);
 
 
 
