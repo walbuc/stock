@@ -1,6 +1,7 @@
 #ifndef UBICACION_H
 #define UBICACION_H
 #include "Articulo.h"
+#include "Lista.h"
 
 
 typedef struct {
@@ -9,7 +10,7 @@ typedef struct {
 
 }Ubicacion;
 
-void construirUbicacion(Ubicacion &ubicacion);
+PtrDato construirUbicacion(Ubicacion &ubicacion);
 
 int getNroUbicacion(Ubicacion &ubicacion);
 
