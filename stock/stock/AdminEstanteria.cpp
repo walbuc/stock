@@ -10,53 +10,6 @@
 using namespace std;
 
 
-
-void configurarEstanteria(Estanteria &estanteria){
-
-    ifstream festanteria;
-    string dato;
-
-    festanteria.open("configuracion.conf");
-
-    if (festanteria.is_open()){
-
-        while (festanteria.good()){
-
-
-            getline(festanteria,dato);
-
-            setCPisos(estanteria, cadenaAentero(dato));
-
-            getline (festanteria, dato);
-
-            setCUbicaciones(estanteria, cadenaAentero(dato));
-
-            getline (festanteria,dato);
-            setKc(estanteria,cadenaAfloat(dato));
-
-
-
-
-        }
-
-        festanteria.close();
-
-    }
-
-    else{
-
-        cout << "Error al abrir el archivo." << endl << endl;
-
-// system ("PAUSE");
-
-    }
-}
-
-
-
-
-
-
 void imprimirUbicacion(Ubicacion &ubicacion){
 
     Articulo articulo;
@@ -69,91 +22,56 @@ void imprimirUbicacion(Ubicacion &ubicacion){
     cout<< "Nro de Articulo: " << articulo.codigoArticulo<<endl;
     cout<<"------------------------"<<endl;
 
-
 }
 
+void estadoUbicaciones(Lista &listaUbicacion){
 
-void estadoUbicacion (Lista &listaUbicacion, int piso){
+    PtrNodoLista cursor;
+    cursor=primero(listaUbicacion);
 
-    cout<<"ESTADO UBICACION, LONGITUD LISTA: "<<longitud(listaUbicacion)<<endl;
-     PtrNodoLista ptrNodoListaUbicacion;
-     cout<<"PISO NRO: "<< piso<<endl;
+    while (cursor != fin()){
 
-    for(int i = 0; i<longitud(listaUbicacion); i++){
 
-        if(i==0){
-            ptrNodoListaUbicacion= primero(listaUbicacion);
-            Ubicacion* ptrUbicacion = (Ubicacion*)ptrNodoListaUbicacion->ptrDato;
-            Ubicacion ubicacion= *ptrUbicacion;
-            imprimirUbicacion(ubicacion);
-        }
-        else {
-            PtrNodoLista ptrNodoListaSiguiente = siguiente(listaUbicacion, ptrNodoListaUbicacion);
-            Ubicacion* ptrSiguiente = (Ubicacion*) ptrNodoListaSiguiente->ptrDato;
-            Ubicacion siguiente = *ptrSiguiente;
-            imprimirUbicacion(siguiente);
-            ptrNodoListaUbicacion = ptrNodoListaSiguiente;
+        int nroUbicacion= getNroUbicacion(*((Ubicacion*)cursor->ptrDato));
+        cout<<"------------------------------------------------"<<endl;
+        cout<<"Nro. Ubicacion: "<<nroUbicacion<<endl;
+        Articulo articulo= getArticulo(*((Ubicacion*)cursor->ptrDato));
+        cout<<"Nro. Articulo: "<< articulo.codigoArticulo<<endl;
+        cout<<"------------------------------------------------"<<endl;
 
-        }
+        cursor=siguiente(listaUbicacion,cursor);
 
     }
-
-
 
 }/**hacer de nuevo el recorrido*/
 
-void estadoPiso(Lista &listaPiso){
-    cout<<"ESTADO PISO, LONGITUD LISTA_PISO: "<<longitud(listaPiso)<<endl;
-    PtrNodoLista ptrNodoListaPiso;
-   // Piso piso;
-    //construirPiso(piso);
-    Lista auxListaUbicacion;
-    crearLista(auxListaUbicacion,compararDatoUbicacion);
+void estadoPisos(Lista &listaPiso){
 
-    for(int i = 1; i<=longitud(listaPiso); i++){
+    PtrNodoLista cursor;
+    cursor=primero(listaPiso);
 
-        if(i==1){
-            ptrNodoListaPiso= primero(listaPiso);
-            Piso* ptrPiso = (Piso*)ptrNodoListaPiso->ptrDato;
-            cout<<longitud(ptrPiso->listaUbicacion)<<endl;
-            estadoUbicacion(ptrPiso->listaUbicacion, ptrPiso->nroPiso);
-        }
-        else {
-            PtrNodoLista ptrNodoListaSiguiente = siguiente(listaPiso, ptrNodoListaPiso);
-            Piso* ptrSiguiente = (Piso*) ptrNodoListaSiguiente->ptrDato;
-            estadoUbicacion(ptrSiguiente->listaUbicacion, ptrSiguiente->nroPiso);
-
-            ptrNodoListaPiso = ptrNodoListaSiguiente;
-
-        }
-
+    while (cursor != fin()){
+        int nroPiso= getNroPisos(*((Piso*)cursor->ptrDato));
+        cout<<"------------------------------------------------"<<endl;
+        cout<<"Nro. Piso: "<<nroPiso<<endl;
+        cout<<"------------------------------------------------"<<endl;
+        cursor=siguiente(listaPiso,cursor);
     }
-
-
-
-
 }
 
+void estadoEstanteria(Lista &listaEstanteria){
 
+    PtrNodoLista cursor;
+    cursor=primero(listaEstanteria);
 
+    while (cursor != fin()){
 
-void imprimirEstanteria(Estanteria &estanteria){
+        int nroCalle= getNroCalle(*((Estanteria*)cursor->ptrDato));
+        cout<<"------------------------------------------------"<<endl;
+        cout<<"Nro.de Calle: "<<nroCalle<<endl;
+        cout<<"------------------------------------------------"<<endl;
+        cursor=siguiente(listaEstanteria,cursor);
 
-
-    cout<<"Nro de calle: "<< getNroCalle(estanteria)<<endl;
-    cout<<"cantidad de pisos: " << getCPisos(estanteria)<<endl;
-    cout<<"cantidad de ubicaciones: " << getCUbicaciones(estanteria)<<endl;
-    cout<<"Kilos por Camión: "<< getKc(estanteria)<<endl;
-
-    Lista lista;
-    crearLista(lista,compararDatoPiso);
-
-    lista= getListaPisos(estanteria);
-    //cout<<"cantidad "<< longitud(lista)<<endl;
-
-    estadoPiso(lista);
-
-
-
+    }
 
     }
