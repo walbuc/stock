@@ -13,13 +13,13 @@ typedef struct{
 
 /*funciones extras*/
 
-void construirPiso(Piso &piso);
+PtrDato construirPiso(Piso &piso);
 
 int getNroPisos(Piso &piso);
 
 void setNroPisos(Piso &piso, int nro);
 
-Lista getListaUbicacion(Piso &piso);
+PtrDato getListaUbicacion(Piso &piso);
 
 void setListaUbicacion(Piso &piso, Lista listaUbicacion);
 
