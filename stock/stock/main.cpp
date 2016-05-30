@@ -12,11 +12,13 @@
 #include "estanteria.h"
 #include "Piso.h"
 #include "Ubicacion"
+#include "Deposito.h"
+#include "AdminDeposito.h"
 #include "lista.h"
 #include "funciones.h"
-
 #include "Articulo.h"
 #include "AdminOperaciones.h"
+
 
 using namespace std;
 
@@ -33,13 +35,13 @@ int main(int argc, const char * argv[]) {
     
     leerArchivosOperaciones();
     
-    /*Prueba de las estanterias*/
-     /*creo estanteria*/
-    Estanteria estanteria;
-    construirEstanteria(estanteria);
-    configurarEstanteria(estanteria);//Levanto los parametros de .confg
+    /*Prueba deposito y las estanterias*/
+      /*se crea el deposito y se configura*/
+    Deposito deposito;
+    construirDeposito(deposito);
+    configurarDeposito(deposito);
 
-    setNroCalle(estanteria,1);//Seteo el nro de calle
+    imprimirDeposito(deposito);
 
     /*Creo tres articulos para probar*/
     Articulo articulo;
@@ -51,17 +53,25 @@ int main(int argc, const char * argv[]) {
     Articulo articulo3;
     constructor(articulo3);
     setCodigoArticulo(articulo3,3);
-    
-    /*Creo un solo piso para probar*/
-    crearPiso(estanteria,1);
-   
-   /*creo las 3 ubicaciones en el piso creado*/
-    crearUbicacion(estanteria,1,articulo);
-    crearUbicacion(estanteria,2,articulo2);
-    crearUbicacion(estanteria,3,articulo3);
-    
-    /*Imprimo la estanteria completa, Pero no lee bien la listaUbicaciones*/
-    imprimirEstanteria(estanteria);
+    /*Creo lista estanteria para probar*/
+    Lista listaEstanteria;
+    crearLista(listaEstanteria,&compararDatoEstanteria);
+    crearEstanteria(listaEstanteria,1);
+    estadoEstanteria(listaEstanteria);
+
+    /*saco estanteria de la lista*/
+    Estanteria estanteria;
+    estanteria= (*(Estanteria*)ultimo(listaEstanteria)->ptrDato);
+    /*Llamo para crear el piso*/
+    crearPiso(estanteria.listaPisos,1);
+    estadoPisos(estanteria.listaPisos);
+
+    /*Pruebo con una lista creada acá para verificar la creacion de ubicacion y lectura*/
+    Lista auxLista;
+    crearLista(auxLista,&compararDatoUbicacion);
+    crearUbicacion(auxLista,1,articulo);
+    crearUbicacion(auxLista,2,articulo2);
+    estadoUbicaciones(auxLista);
  
  
     
