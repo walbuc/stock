@@ -1,10 +1,13 @@
 #include "Ubicacion.h"
 
 
-
-void construirUbicacion(Ubicacion &ubicacion){
-    setNroUbicacion(ubicacion, 0);
-    constructor(ubicacion.articulo);
+PtrDato construirUbicacion(Ubicacion &ubicacion){
+    PtrDato puntero= new Ubicacion;
+    ubicacion.nroUbicacion=0;
+    Articulo articulo;
+    constructor(articulo);
+    ubicacion.articulo= articulo;
+    return puntero;
 }
 
 int getNroUbicacion(Ubicacion &ubicacion){
