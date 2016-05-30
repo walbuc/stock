@@ -11,7 +11,7 @@
 #include "AdminEstanteria.h"
 #include "estanteria.h"
 #include "Piso.h"
-#include "Ubicacion"
+#include "Ubicacion.h"
 #include "Deposito.h"
 #include "AdminDeposito.h"
 #include "lista.h"
