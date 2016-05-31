@@ -17,8 +17,8 @@ void setNroPisos(Piso &piso, int nro){
     piso.nroPiso=nro;
 
 }
-PtrDato getListaUbicacion(Piso &piso){
-    return &piso.listaUbicacion;
+Lista& getListaUbicacion(Piso &piso){
+    return piso.listaUbicacion;
 }
 
 void setListaUbicacion(Piso &piso, Lista listaUbicacion){
