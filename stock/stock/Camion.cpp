@@ -7,9 +7,8 @@
 void crearCamion(Camion &amp;camion){
 
 	camion.nroCamion=0;	
-	camion.kgCapacidad=0.0;	
-	camion.cargaTotal=0.0;	
-	camion.porcentajeOcupado=0.0;	
+	camion.kgCapacidad=2500;	
+	camion.cargaTotal=0.0;		
 	camion.pilaSolicitudes;
 }
 
@@ -36,12 +35,6 @@ camion.cargaTotal=dato;
 
 }
 
-
-void setPorcentajeOcupado(Camion &camion, float dato){
-
-camion.porcentajeOcupado=dato;
-
-}
 
 void setPilaSolicitudes(Camion &camion, Pila pilaNueva){
 
@@ -71,15 +64,15 @@ return camion.cargaTotal;
 }
 
 
-float getPorcentajeOcupado(Camion &camion){
+Pila getPilaSolicitudes(Camion &camion){
 
-return camion.porcentajeOcupado;
+return camion.pilaSolicitudes;
 
 }
 
-Pila getPorcentajeOcupado(Camion &camion){
+float calcularPorcentajeOcupado(Camion &camion){
 
-return camion.pilaSolicitudes;
+return ((camion.kgCapacidad * 100)/camion.cargaTotal);
 
 }
 
