@@ -108,21 +108,6 @@ void setCargaTotal(Camion &camion, float dato);
 PRE:
     La instancia del TDA (camion) debe haberse creado con anterioridad y nunca se ejecutó la primitiva destruir sobre esta instancia.
 POST:
-    El campo porcentajeOcupado pasa a tener el dato ingresado.
-PARAMETROS:
-    camion: instancia sobre la cual se aplica la primitiva.
-    dato: valor utilizado para asignar a la instancia de camion.
-RETORNO:
-    No aplica.
-*/
-
-void setPorcentajeOcupado(Camion &camion, Pila dato);
-
-
-/**
-PRE:
-    La instancia del TDA (camion) debe haberse creado con anterioridad y nunca se ejecutó la primitiva destruir sobre esta instancia.
-POST:
     Actualizo pilaSolicitudes asignandole pilaNueva
 PARAMETROS:
     camion: instancia sobre la cual se aplica la primitiva.
@@ -180,20 +165,6 @@ float getCargaTotal(Camion &camion);
 PRE:
     La instancia del TDA (camion) debe haberse creado con anterioridad (primitiva crear) y nunca se ejecutó la primitiva destruir sobre esta instancia.
 POST:
-    devuelve el porcentaje ocupado del camion
-ATRIBUTOS:
-    camion: instancia sobre la cual se aplica la primitiva.
-RETORNO:
-   	Porcentaje ocupado del camion en formato float.
-*/
-
-float getPorcentajeOcupado(Camion &camion);
-
-
-/**
-PRE:
-    La instancia del TDA (camion) debe haberse creado con anterioridad (primitiva crear) y nunca se ejecutó la primitiva destruir sobre esta instancia.
-POST:
     devuelve la pila de solicitudes
 ATRIBUTOS:
     camion: instancia sobre la cual se aplica la primitiva.
@@ -201,7 +172,8 @@ RETORNO:
    	Pila de solicitudes.
 */
 
-Pila getPorcentajeOcupado(Camion &camion);
+Pila getPilaSolicitudes(Camion &camion);
 
+float calcularPorcentajeOcupado(Camion &camion);
 
 #endif
