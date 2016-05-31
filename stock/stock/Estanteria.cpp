@@ -77,8 +77,8 @@ void construirEstanteria (Estanteria &estanteria){
  RETORNO:
  Devuelve Lista de Pisos.
  **/
-PtrDato getListaPisos(Estanteria &estanteria){
-    return &estanteria.listaPisos;
+Lista& getListaPisos(Estanteria &estanteria){
+    return estanteria.listaPisos;
  }
 
 

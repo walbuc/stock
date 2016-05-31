@@ -136,7 +136,7 @@ void setCPisos(Deposito &deposito, int cPisos){
  RETORNO:
  Asigna lista pasada por parametro.
  **/
- void setListaPisos(Deposito &deposito, Lista listaEstanteria){
+ void setListaEstanteria(Deposito &deposito, Lista listaEstanteria){
     deposito.listaEstanteria= listaEstanteria;
  }
 

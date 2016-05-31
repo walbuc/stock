@@ -26,6 +26,19 @@ ResultadoComparacion compararDatoArticulo(PtrDato ptrDato1, PtrDato ptrDato2) {
     }
 }
 
+ResultadoComparacion compararDatoIndice(PtrDato ptrDato1, PtrDato ptrDato2) {
+    if ( (*(Indice*)ptrDato1).codigoArticulo > (*(Indice*)ptrDato2).codigoArticulo ) {
+        return MAYOR;
+    }
+    else if (((Indice*)ptrDato1)->codigoArticulo < ((Indice*)ptrDato2)->codigoArticulo) {
+        return MENOR;
+    }
+    else {
+        return IGUAL;
+    }
+    
+}
+
 ResultadoComparacion compararDatoEstanteria(PtrDato ptrDato1, PtrDato ptrDato2) {
     if ( ((Estanteria*)ptrDato1)->nroCalle > ((Estanteria*)ptrDato2)->nroCalle ) {
         return MAYOR;

@@ -21,6 +21,8 @@ using namespace std;
 
 ResultadoComparacion compararDatoArticulo(PtrDato ptrDato1, PtrDato ptrDato2);
 
+ResultadoComparacion compararDatoIndice(PtrDato ptrDato1, PtrDato ptrDato2);
+
 ResultadoComparacion compararDatoEstanteria(PtrDato ptrDato1, PtrDato ptrDato2);
 
 ResultadoComparacion compararDatoPiso(PtrDato ptrDato1, PtrDato ptrDato2);

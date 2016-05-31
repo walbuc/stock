@@ -79,7 +79,7 @@ DESTRUIR_ESTANTERIA
  RETORNO:
  Devuelve Ptrdato Lista de Pisos.
  **/
-PtrDato getListaPisos(Estanteria &estanteria);
+Lista& getListaPisos(Estanteria &estanteria);
 
 
  /**

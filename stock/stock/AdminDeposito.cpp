@@ -13,7 +13,7 @@ void configurarDeposito(Deposito &deposito){
     ifstream fdeposito;
     string dato;
 
-    fdeposito.open("configuracion.conf");
+    fdeposito.open("/Users/walter/Documents/personal-repositories/stock/stock/stock/configuracion.conf");
 
     if (fdeposito.is_open()){
 
@@ -32,7 +32,7 @@ void configurarDeposito(Deposito &deposito){
 
     else{
 
-        cout << "Error al abrir el archivo." << endl << endl;
+        cout << "Error al abrir el archivo configuracion." << endl << endl;
 
 // system ("PAUSE");
 

@@ -40,14 +40,22 @@ int main(int argc, const char * argv[]) {
     
     crearLista(listaEstanteria,&compararDatoEstanteria);
     crearLista(listaArticulo, &compararDatoArticulo);
-    crearLista(listaArticulo, &compararDatoArticulo);
+    crearLista(listaIndice, &compararDatoIndice);
+    
     
     setListaEstanteria(deposito, listaEstanteria);
-    //en construccion
-    //cargarMaestroDeArticulos(deposito, listaArticulo, listaIndice);
     
+    cargarMaestroDeArticulos(deposito, listaArticulo, listaIndice);
     
+    estadoEstanteria(getListaEstanteria(deposito));
+    estadoPisos(getListaPisos(*(Estanteria*)((getListaEstanteria(deposito).primero)->ptrDato)));
+    
+    Estanteria& estanteria = *(Estanteria*)((getListaEstanteria(deposito).primero)->ptrDato);
+    
+    estadoUbicaciones(getListaUbicacion(*(Piso*)((getListaPisos(estanteria).primero)->ptrDato)));
     //leerArchivosOperaciones();
+    
+    
     
     
     /*Creo tres articulos para probar*/
