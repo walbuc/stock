@@ -12,11 +12,11 @@
 #include <stdio.h>
 #include "funciones.h"
 
-#endif /* AdminOperaciones_h */
-
-
-void leerArchivosOperaciones();
+void leerArchivosOperaciones(Lista &listaEstanteria, Lista &listaIndice);
 
 int compararHoras(int hora, int minuto, int segundo, int hora1, int minuto1, int segundo1);
 
-void procesarIngreso();
+void procesarIngreso(Lista &listaEstanteria, Lista &listaIndice, int idArticulo, float cantidad);
+
+PtrNodoLista buscarUbicacionArticulo(Lista &listaEstanteria, int c, int p, int u);
+#endif /* AdminOperaciones_h */

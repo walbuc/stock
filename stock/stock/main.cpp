@@ -44,16 +44,19 @@ int main(int argc, const char * argv[]) {
     
     
     setListaEstanteria(deposito, listaEstanteria);
-    
+    //cargo los articulos de articulo.db
     cargarMaestroDeArticulos(deposito, listaArticulo, listaIndice);
     
+    //imprimo las estanterias
     estadoEstanteria(getListaEstanteria(deposito));
+    //imprimo los pisos de la primer estanteria
     estadoPisos(getListaPisos(*(Estanteria*)((getListaEstanteria(deposito).primero)->ptrDato)));
-    
     Estanteria& estanteria = *(Estanteria*)((getListaEstanteria(deposito).primero)->ptrDato);
-    
+    //imprimo lasubicaciones del primer piso
     estadoUbicaciones(getListaUbicacion(*(Piso*)((getListaPisos(estanteria).primero)->ptrDato)));
-    //leerArchivosOperaciones();
+    
+    //leo los archivos de operaciones ingreso y solicitud paralelamente
+    leerArchivosOperaciones(getListaEstanteria(deposito), listaIndice);
     
     
     

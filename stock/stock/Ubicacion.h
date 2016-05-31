@@ -6,8 +6,9 @@
 
 typedef struct {
     int nroUbicacion;
+    float cantidad;
     Articulo articulo;
-
+    
 }Ubicacion;
 
 void construirUbicacion(Ubicacion &ubicacion);
@@ -20,5 +21,8 @@ Articulo getArticulo (Ubicacion &ubicacion);
 
 void setArticulo (Ubicacion &ubicacion, Articulo articulo);
 
+void setCantidad (Ubicacion &ubicacion, float cantidad);
+
+float getCantidad (Ubicacion &ubicacion);
 
 #endif // UBICACION_H

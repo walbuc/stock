@@ -18,17 +18,17 @@
 
 using namespace std;
 
-void leerArchivosOperaciones(){
+void leerArchivosOperaciones(Lista &listaEstanteria, Lista &listaIndice){
     
     ifstream fingresos, fsolicitudes;
     string dato;
-    int idArticulo, hora =0, minuto=0, segundo=0, idArticuloSucursal=0, idSucursal=0, horaS=0, minutoS=0, segundoS=0, resultado=0;
-    float cantidad, cantidadSucursal;
+    int idArticulo=0, hora =0, minuto=0, segundo=0, idArticuloSucursal=0, idSucursal=0, horaS=0, minutoS=0, segundoS=0, resultado=0;
+    float cantidad=0, cantidadSucursal;
     bool flagIngreso = false;
     bool flagSolicitud = false;
     bool compararSolicitud = true;
     bool compararIngreso = true;
-    
+    //cambiar ruta
     fingresos.open("/Users/walter/Documents/personal-repositories/stock/stock/stock/ingresos.db");
     fsolicitudes.open("/Users/walter/Documents/personal-repositories/stock/stock/stock/solicitudes.db");
     
@@ -91,6 +91,8 @@ void leerArchivosOperaciones(){
             
             if(compararIngreso && !compararSolicitud){
                 //procesarIngreso
+                
+                procesarIngreso(listaEstanteria, listaIndice, idArticulo, cantidad);
                 cout << "proceso ingreso\n";
                 flagIngreso = true;
                 flagSolicitud =false;
@@ -106,6 +108,7 @@ void leerArchivosOperaciones(){
                     flagIngreso = false;
                 } else if(resultado < 0) {
                     //procesarIngreso
+                    procesarIngreso(listaEstanteria, listaIndice, idArticulo, cantidad);
                     cout << "proceso ingreso\n";
                     flagIngreso = true;
                     flagSolicitud =false;
@@ -154,3 +157,57 @@ int compararHoras(int hora, int minuto, int segundo, int hora1, int minuto1, int
     return -2;
 }
 
+void procesarIngreso(Lista &listaEstanteria, Lista &listaIndice, int idArticulo, float cantidad){
+    //lo creo en el stack, despues no lo voy a usar.
+    Indice indiceArticulo;
+    indiceArticulo.codigoArticulo = idArticulo;
+    
+    PtrNodoLista localizador = localizarDato(listaIndice, &indiceArticulo);
+    
+    if (localizador == fin()) {
+        //no se encontro el dato, entonces checkear ubicaciones disponibles sino crear calle.
+        cout << "no se encontro el articulo.\n";
+    }
+    else {
+        //se encontro, entonces almaceno
+        Indice indice = *((Indice*)localizador->ptrDato);
+        
+        //obtengo la ubicacion ya actualizo la cantidad
+        PtrNodoLista prtNodoUbicacion = buscarUbicacionArticulo(listaEstanteria, indice.c, indice.p, indice.u);
+        
+        int total = getCantidad(*(Ubicacion*)prtNodoUbicacion->ptrDato);
+        total = total + cantidad;
+        setCantidad(*(Ubicacion*)prtNodoUbicacion->ptrDato, total);
+    }
+    
+}
+
+//cambiar a articulo adm. Busca directamente la calle piso y ubicacion del articulo si no lo encuentra retorna null.
+PtrNodoLista buscarUbicacionArticulo(Lista &listaEstanteria, int c, int p, int u){
+    
+    Estanteria estanteria;
+    construirEstanteria(estanteria);
+    setNroCalle(estanteria, c);
+    
+    PtrNodoLista ptrNodoEstanteria = localizarDato(listaEstanteria, &estanteria);
+    
+    Piso piso;
+    construirPiso(piso);
+    setNroPisos(piso, p);
+    
+    Lista& listaPisos = getListaPisos( (*(Estanteria*)ptrNodoEstanteria->ptrDato) );
+    
+    PtrNodoLista ptrNodoPiso = localizarDato(listaPisos, &piso);
+    
+    Ubicacion ubicacion;
+    construirUbicacion(ubicacion);
+    setNroUbicacion(ubicacion, u);
+    
+    //otra forma de acceder, no usa get
+    Lista& listaUbicaciones = ((Piso*)ptrNodoPiso->ptrDato)->listaUbicacion;
+    
+    PtrNodoLista ptrUbicacion = localizarDato(listaUbicaciones, &ubicacion);
+    
+    return ptrUbicacion;
+    
+}
