@@ -55,7 +55,7 @@ void setCPisos(Deposito &deposito, int cPisos);
  RETORNO:
  Devuelve el numero de cUbicaciones..
  **/
- int getCUbicaciones(Deposito deposito);
+ int getCUbicaciones(Deposito &deposito);
 
 
  /**

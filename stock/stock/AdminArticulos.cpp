@@ -62,19 +62,45 @@ void cargarArticulos(Lista &listaArticulos){
 void cargarMaestroDeArticulos(Deposito &deposito, Lista &listaArticulos, Lista &listaIndice) {
     
     cargarArticulos(listaArticulos);
-    
     PtrNodoLista cursor = primero(listaArticulos);
-    //estadoListaArticulos(listaArticulos);
+    estadoListaArticulos(listaArticulos);
     int i = 0;
     
     while (cursor != fin()){
         i++;
-        
+        //creo estanteria
         PtrNodoLista ptrNodoEstanteria = crearEstanteria(getListaEstanteria(deposito), i);
         
-        crearPiso(<#Lista &listaPisos#>, <#int nroPiso#>)
-        cursor = siguiente(listaArticulos, cursor);
+        //creo pisos
+        for(int j = 0; j < getCPisos(deposito); j++){
+            if (cursor == fin()){
+                break;
+            }
+            
+            PtrNodoLista ptrNodoPiso =  crearPiso(getListaPisos((*(Estanteria*)ptrNodoEstanteria->ptrDato)), j);
+            
+            //creo ubicacion
+            for(int l = 0; l < getCUbicaciones(deposito); l++){
+                //ver si se puede guardar la referencia en una variable.
+                crearUbicacion(getListaUbicacion(*(Piso*)ptrNodoPiso->ptrDato), l, *((Articulo*)cursor->ptrDato));
+                //guardar lista indice - no es un tda entonces no llamo al constructor
+                Indice* indice = new Indice;
+                indice->c = i;
+                indice->p = j;
+                indice->u = l;
+                indice->codigoArticulo = (*((Articulo*)cursor->ptrDato)).codigoArticulo;
+                
+                adicionarFinal(listaIndice, indice);
+                
+                cursor = siguiente(listaArticulos, cursor);
+                
+                if (cursor == fin()){
+                    break;
+                }
+                
+            }
         
+        }
         
     }
     
