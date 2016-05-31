@@ -30,13 +30,13 @@ void estadoUbicaciones(Lista &listaUbicacion){
     cursor=primero(listaUbicacion);
 
     while (cursor != fin()){
-
-
+        
         int nroUbicacion= getNroUbicacion(*((Ubicacion*)cursor->ptrDato));
         cout<<"------------------------------------------------"<<endl;
         cout<<"Nro. Ubicacion: "<<nroUbicacion<<endl;
-        Articulo articulo= getArticulo(*((Ubicacion*)cursor->ptrDato));
+        Articulo articulo = getArticulo(*((Ubicacion*)cursor->ptrDato));
         cout<<"Nro. Articulo: "<< articulo.codigoArticulo<<endl;
+        cout<<"Cantidad: "<< getCantidad(*((Ubicacion*)cursor->ptrDato))<<endl;
         cout<<"------------------------------------------------"<<endl;
 
         cursor=siguiente(listaUbicacion,cursor);

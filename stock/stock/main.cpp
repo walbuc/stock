@@ -59,7 +59,7 @@ int main(int argc, const char * argv[]) {
     leerArchivosOperaciones(getListaEstanteria(deposito), listaIndice);
     
     
-    
+    estadoUbicaciones(getListaUbicacion(*(Piso*)((getListaPisos(estanteria).primero)->ptrDato)));
     
     /*Creo tres articulos para probar*/
     //Articulo articulo;
