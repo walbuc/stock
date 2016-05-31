@@ -19,7 +19,7 @@ int getNroPisos(Piso &piso);
 
 void setNroPisos(Piso &piso, int nro);
 
-PtrDato getListaUbicacion(Piso &piso);
+Lista& getListaUbicacion(Piso &piso);
 
 void setListaUbicacion(Piso &piso, Lista listaUbicacion);
 
