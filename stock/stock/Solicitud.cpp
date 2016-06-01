@@ -1,54 +1,50 @@
-include <cstdlib>;
-#include <iostream>;
-#include <string>;
-#include <stdio>
-#include "articulo.h";
-#include "sucursal.h";
+
+#include "lista.h"
+#include "Solicitud.h"
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
+
 
 using namespace std;
 
-#ifndef __SOLICITUD_H__
-#define __SOLICITUD_H__
-#ifndef NULL
-#define NULL 0
-#endif
-
-
 void constructor(Solicitud &solicitud)
 {
-	Sucursal.codigoSucursal = 0;
-	Articulo.codigoArticulo = 0;
-	float cantidad = 0.0;
-	string hora = 00:00:00;
+    solicitud.codigoSucursal = 0;
+	solicitud.codigoArticulo = 0;
+    solicitud.cantidad = 0.0;
+	solicitud.hora = "";
 }
+
 
 void destructor(Solicitud &solicitud)
 {
 }
 
-int getCodigoSucursal(Sucursal &sucursal)
+int getCodigoSucursal(Solicitud &solicitud)
 {
-	return sucursal.codigoSucursal;
+	return solicitud.codigoSucursal;
 }
 
-void setCodigoSucursal(Sucursal &sucursal, int codigoSucursal)
+void setCodigoSucursal(Solicitud &solicitud, int codigoSucursal)
 {
 	if (codigoSucursal >= 0) 
 	{
-		sucursal.codigoSucursal = codigoSucursal;
+		solicitud.codigoSucursal = codigoSucursal;
 	}
 }
 
-int getCodigoArticulo(Articulo &articulo)
+int getCodigoArticulo(Solicitud &solicitud)
 {
-	return articulo.codigoArticulo;
+	return solicitud.codigoArticulo;
 }
 
-void setCodigoArticulo(Articulo &articulo, int codigoArticulo)
+void setCodigoArticulo(Solicitud &solicitud, int codigoArticulo)
 {
 	if (codigoArticulo >= 0) 
 	{
-		articulo.codigoArticulo = codigoArticulo;
+		solicitud.codigoArticulo = codigoArticulo;
 	}
 }
 
@@ -67,11 +63,12 @@ void setCantidadSolicitud(Solicitud &solicitud, float cantidad)
 
 string getHoraSolicitud(Solicitud &solicitud)
 {
-	return solicitud.hora;
+    return solicitud.hora;
 }
 
 void setHoraSolicitud(Solicitud &solicitud, string hora)
 {
-	// debo validar el string para dar robustez
 	solicitud.hora = hora;
 }
+
+

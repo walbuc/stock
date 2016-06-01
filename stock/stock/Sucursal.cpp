@@ -1,7 +1,8 @@
-#include <cstdlib>;
-#include <iostream>;
-#include <string>;
-#include <stdio>;
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include "Sucursal.h"
+
 
 using namespace std;
 
@@ -12,14 +13,10 @@ using namespace std;
 #endif
 
 
-/* Tipo de Estructura Sucursal. */
-struct Sucursal {
-    int codigoSucursal;
-};
 
 void constructor(Sucursal &sucursal)
 {
-	codigoSucursal = 0;
+	sucursal.codigoSucursal = 0;
 }
 
 void destructor(Sucursal &sucursal)
@@ -28,13 +25,14 @@ void destructor(Sucursal &sucursal)
 
 int getCodigoSucursal(Sucursal &sucursal)
 {
-	return codigoSucursal;
+	return sucursal.codigoSucursal;
 }
 
 void setCodigoSucursal(Sucursal &sucursal, int codigo)
 {
 	if (codigo >= 0) 
 	{
-		codigoSucursal = codigo;
+		sucursal.codigoSucursal = codigo;
 	}
 }
+#endif __SUCURSAL_H__
