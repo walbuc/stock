@@ -14,3 +14,5 @@ void destructor(Sucursal &sucursal);
 int getCodigoSucursal(Sucursal &sucursal);
 
 void setCodigoSucursal(Sucursal &sucursal, int codigo);
+
+#endif sucursal_h
