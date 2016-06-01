@@ -72,7 +72,7 @@ void cargarMaestroDeArticulos(Deposito &deposito, Lista &listaArticulos, Lista &
         PtrNodoLista ptrNodoEstanteria = crearEstanteria(getListaEstanteria(deposito), i);
         
         //creo pisos
-        for(int j = 0; j < getCPisos(deposito); j++){
+        for(int j = 1; j <= getCPisos(deposito); j++){
             if (cursor == fin()){
                 break;
             }
@@ -80,7 +80,7 @@ void cargarMaestroDeArticulos(Deposito &deposito, Lista &listaArticulos, Lista &
             PtrNodoLista ptrNodoPiso =  crearPiso(getListaPisos((*(Estanteria*)ptrNodoEstanteria->ptrDato)), j);
             
             //creo ubicacion
-            for(int l = 0; l < getCUbicaciones(deposito); l++){
+            for(int l = 1; l <= getCUbicaciones(deposito); l++){
                 //ver si se puede guardar la referencia en una variable.
                 crearUbicacion(getListaUbicacion(*(Piso*)ptrNodoPiso->ptrDato), l, *((Articulo*)cursor->ptrDato));
                 //guardar lista indice - no es un tda entonces no llamo al constructor

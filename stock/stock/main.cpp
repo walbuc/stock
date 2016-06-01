@@ -61,23 +61,23 @@ int main(int argc, const char * argv[]) {
     //imprimo lasubicaciones de la primera calle
     
     
-    estadoPisos(getListaPisos(*(Estanteria*)((getListaEstanteria(deposito).primero)->ptrDato)));
-    estadoUbicaciones(getListaUbicacion(*(Piso*)((getListaPisos(estanteria).primero)->ptrDato)));
+    //estadoPisos(getListaPisos(*(Estanteria*)((getListaEstanteria(deposito).primero)->ptrDato)));
+    //estadoUbicaciones(getListaUbicacion(*(Piso*)((getListaPisos(estanteria).primero)->ptrDato)));
     
     //Imprimir Todo
-    PtrNodoLista cursorEstanteria, cursorPiso, cursorUbicacion;
+    PtrNodoLista cursorEstanteria, cursorPiso;
     cursorEstanteria = primero(getListaEstanteria(deposito));
-    cursorPiso = primero(getListaPisos(*(Estanteria*)cursorEstanteria->ptrDato));
-    cursorUbicacion = primero(getListaUbicacion(*(Piso*)cursorPiso->ptrDato));
-    
-    
-    /*
-    while(cursorEstanteria != fin()){
+    cout<<"------------------------------------------------"<<endl;
+    cout<<" Imprimir informacion: "<<endl;
+    cout<<"------------------------------------------------"<<endl;
+    while(cursorEstanteria != fin()) {
+        
         int nroCalle= getNroCalle(*((Estanteria*)cursorEstanteria->ptrDato));
         cout<<"------------------------------------------------"<<endl;
         cout<<"Nro.de Calle: "<<nroCalle<<endl;
         cout<<"------------------------------------------------"<<endl;
         
+        cursorPiso = primero(getListaPisos(*(Estanteria*)cursorEstanteria->ptrDato));
         while(cursorPiso != fin()){
             
             int nroPiso= getNroPisos(*((Piso*)cursorPiso->ptrDato));
@@ -85,26 +85,16 @@ int main(int argc, const char * argv[]) {
             cout<<"Nro. Piso: "<<nroPiso<<endl;
             cout<<"------------------------------------------------"<<endl;
             
-            while(cursorUbicacion != fin()){
-                int nroUbicacion= getNroUbicacion(*((Ubicacion*)cursorUbicacion->ptrDato));
-                cout<<"------------------------------------------------"<<endl;
-                cout<<"Nro. Ubicacion: "<<nroUbicacion<<endl;
-                Articulo articulo = getArticulo(*((Ubicacion*)cursorUbicacion->ptrDato));
-                cout<<"Nro. Articulo: "<< articulo.codigoArticulo<<endl;
-                cout<<"Cantidad: "<< getCantidad(*((Ubicacion*)cursorUbicacion->ptrDato))<<endl;
-                cout<<"------------------------------------------------"<<endl;
-
-                siguiente(getListaUbicacion(*(Piso*)cursorPiso->ptrDato), cursorUbicacion);
-            }
+            estadoUbicaciones(getListaUbicacion(*(Piso*)cursorPiso->ptrDato));
             
-            siguiente(getListaPisos(*(Estanteria*)cursorEstanteria->ptrDato), cursorPiso);
+            cursorPiso = siguiente(getListaPisos(*(Estanteria*)cursorEstanteria->ptrDato), cursorPiso);
         }
         
-        siguiente(getListaEstanteria(deposito), cursorEstanteria);
+        cursorEstanteria = siguiente(getListaEstanteria(deposito), cursorEstanteria);
         
     }
     
-    */
+    
     cout << "Hello, World!\n";
     return 0;
 }

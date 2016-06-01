@@ -84,7 +84,7 @@ void leerArchivosOperaciones(Deposito &deposito, Lista &listaEstanteria, Lista &
             
             if(!compararIngreso && compararSolicitud){
                 //procesarSolicitud
-                cout << "proceso solicitud\n";
+                //cout << "proceso solicitud\n";
                 flagSolicitud= true;
                 flagIngreso = false;
             }
@@ -93,7 +93,7 @@ void leerArchivosOperaciones(Deposito &deposito, Lista &listaEstanteria, Lista &
                 //procesarIngreso
                 
                 procesarIngreso(deposito, listaEstanteria, listaIndice, idArticulo, cantidad);
-                cout << "proceso ingreso\n";
+                //cout << "proceso ingreso\n";
                 flagIngreso = true;
                 flagSolicitud =false;
             }
@@ -103,13 +103,13 @@ void leerArchivosOperaciones(Deposito &deposito, Lista &listaEstanteria, Lista &
                 
                 if (resultado > 0) {
                     //procesarSolicitud
-                    cout << "proceso solicitud\n";
+                    //cout << "proceso solicitud\n";
                     flagSolicitud= true;
                     flagIngreso = false;
                 } else if(resultado < 0) {
                     //procesarIngreso
                     procesarIngreso(deposito, listaEstanteria, listaIndice, idArticulo, cantidad);
-                    cout << "proceso ingreso\n";
+                    //cout << "proceso ingreso\n";
                     flagIngreso = true;
                     flagSolicitud =false;
                 }
@@ -166,7 +166,7 @@ void procesarIngreso(Deposito &deposito, Lista &listaEstanteria, Lista &listaInd
     
     if (localizador == fin()) {
         //no se encontro el dato, entonces checkear ubicaciones disponibles sino crear calle.
-        cout << "no se encontro el articulo.\n";
+        //cout << "no se encontro el articulo.\n";
         PtrNodoLista ptrNodoEstanteria = ultimo(listaEstanteria);
         PtrNodoLista ptrNodoPiso = ultimo(getListaPisos(*(Estanteria*)ptrNodoEstanteria->ptrDato));
         PtrNodoLista ptrNodoUbicacion = ultimo(getListaUbicacion((*(Piso*)ptrNodoPiso->ptrDato)));
@@ -222,7 +222,7 @@ void procesarIngreso(Deposito &deposito, Lista &listaEstanteria, Lista &listaInd
                 
                 PtrNodoLista ptrNodoNuevoPiso = crearPiso(getListaPisos((*(Estanteria*)ptrNodoNuevaEstanteria->ptrDato)), nroPiso);
                 
-                PtrNodoLista ptrNodoNuevaUbicacion = crearUbicacion(getListaUbicacion((*(Piso*)ptrNodoNuevoPiso->ptrDato)), nroUbicacion, *ptrArticulo);
+                crearUbicacion(getListaUbicacion((*(Piso*)ptrNodoNuevoPiso->ptrDato)), nroUbicacion, *ptrArticulo);
             
                 Indice* indice = new Indice;
                 indice->c = nroCalle;
