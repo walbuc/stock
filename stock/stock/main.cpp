@@ -52,49 +52,59 @@ int main(int argc, const char * argv[]) {
     //imprimo los pisos de la primer estanteria
     estadoPisos(getListaPisos(*(Estanteria*)((getListaEstanteria(deposito).primero)->ptrDato)));
     Estanteria& estanteria = *(Estanteria*)((getListaEstanteria(deposito).primero)->ptrDato);
+    
     //imprimo lasubicaciones del primer piso
     estadoUbicaciones(getListaUbicacion(*(Piso*)((getListaPisos(estanteria).primero)->ptrDato)));
     
     //leo los archivos de operaciones ingreso y solicitud paralelamente
-    leerArchivosOperaciones(getListaEstanteria(deposito), listaIndice);
+    leerArchivosOperaciones(deposito, getListaEstanteria(deposito), listaIndice);
+    //imprimo lasubicaciones de la primera calle
     
     
+    estadoPisos(getListaPisos(*(Estanteria*)((getListaEstanteria(deposito).primero)->ptrDato)));
     estadoUbicaciones(getListaUbicacion(*(Piso*)((getListaPisos(estanteria).primero)->ptrDato)));
     
-    /*Creo tres articulos para probar*/
-    //Articulo articulo;
-    //constructor(articulo);
-    //setCodigoArticulo(articulo,1);
-    //Articulo articulo2;
-    //constructor(articulo2);
-    //setCodigoArticulo(articulo2,2);
-    //Articulo articulo3;
-    //constructor(articulo3);
-    //setCodigoArticulo(articulo3,3);
-    
-    /*Creo lista estanteria para probar*/
-    //Lista listaEstanteria;
-    //crearLista(listaEstanteria,&compararDatoEstanteria);
-    
-    //crearEstanteria(listaEstanteria,1);
-    
-    //estadoEstanteria(listaEstanteria);
-    
-    /*saco estanteria de la lista*/
-    //Estanteria estanteria;
-    //estanteria= (*(Estanteria*)ultimo(listaEstanteria)->ptrDato);
-    /*Llamo para crear el piso*/
-    //crearPiso(estanteria.listaPisos,1);
-    //estadoPisos(estanteria.listaPisos);
-    
-    /*Pruebo con una lista creada acá para verificar la creacion de ubicacion y lectura*/
-    //Lista auxLista;
-    //crearLista(auxLista,&compararDatoUbicacion);
-    //crearUbicacion(auxLista,1,articulo);
-    //crearUbicacion(auxLista,2,articulo2);
-    //estadoUbicaciones(auxLista);
+    //Imprimir Todo
+    PtrNodoLista cursorEstanteria, cursorPiso, cursorUbicacion;
+    cursorEstanteria = primero(getListaEstanteria(deposito));
+    cursorPiso = primero(getListaPisos(*(Estanteria*)cursorEstanteria->ptrDato));
+    cursorUbicacion = primero(getListaUbicacion(*(Piso*)cursorPiso->ptrDato));
     
     
+    /*
+    while(cursorEstanteria != fin()){
+        int nroCalle= getNroCalle(*((Estanteria*)cursorEstanteria->ptrDato));
+        cout<<"------------------------------------------------"<<endl;
+        cout<<"Nro.de Calle: "<<nroCalle<<endl;
+        cout<<"------------------------------------------------"<<endl;
+        
+        while(cursorPiso != fin()){
+            
+            int nroPiso= getNroPisos(*((Piso*)cursorPiso->ptrDato));
+            cout<<"------------------------------------------------"<<endl;
+            cout<<"Nro. Piso: "<<nroPiso<<endl;
+            cout<<"------------------------------------------------"<<endl;
+            
+            while(cursorUbicacion != fin()){
+                int nroUbicacion= getNroUbicacion(*((Ubicacion*)cursorUbicacion->ptrDato));
+                cout<<"------------------------------------------------"<<endl;
+                cout<<"Nro. Ubicacion: "<<nroUbicacion<<endl;
+                Articulo articulo = getArticulo(*((Ubicacion*)cursorUbicacion->ptrDato));
+                cout<<"Nro. Articulo: "<< articulo.codigoArticulo<<endl;
+                cout<<"Cantidad: "<< getCantidad(*((Ubicacion*)cursorUbicacion->ptrDato))<<endl;
+                cout<<"------------------------------------------------"<<endl;
+
+                siguiente(getListaUbicacion(*(Piso*)cursorPiso->ptrDato), cursorUbicacion);
+            }
+            
+            siguiente(getListaPisos(*(Estanteria*)cursorEstanteria->ptrDato), cursorPiso);
+        }
+        
+        siguiente(getListaEstanteria(deposito), cursorEstanteria);
+        
+    }
+    
+    */
     cout << "Hello, World!\n";
     return 0;
 }

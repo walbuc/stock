@@ -18,7 +18,7 @@
 
 using namespace std;
 
-void leerArchivosOperaciones(Lista &listaEstanteria, Lista &listaIndice){
+void leerArchivosOperaciones(Deposito &deposito, Lista &listaEstanteria, Lista &listaIndice){
     
     ifstream fingresos, fsolicitudes;
     string dato;
@@ -92,7 +92,7 @@ void leerArchivosOperaciones(Lista &listaEstanteria, Lista &listaIndice){
             if(compararIngreso && !compararSolicitud){
                 //procesarIngreso
                 
-                procesarIngreso(listaEstanteria, listaIndice, idArticulo, cantidad);
+                procesarIngreso(deposito, listaEstanteria, listaIndice, idArticulo, cantidad);
                 cout << "proceso ingreso\n";
                 flagIngreso = true;
                 flagSolicitud =false;
@@ -108,7 +108,7 @@ void leerArchivosOperaciones(Lista &listaEstanteria, Lista &listaIndice){
                     flagIngreso = false;
                 } else if(resultado < 0) {
                     //procesarIngreso
-                    procesarIngreso(listaEstanteria, listaIndice, idArticulo, cantidad);
+                    procesarIngreso(deposito, listaEstanteria, listaIndice, idArticulo, cantidad);
                     cout << "proceso ingreso\n";
                     flagIngreso = true;
                     flagSolicitud =false;
@@ -157,7 +157,7 @@ int compararHoras(int hora, int minuto, int segundo, int hora1, int minuto1, int
     return -2;
 }
 
-void procesarIngreso(Lista &listaEstanteria, Lista &listaIndice, int idArticulo, float cantidad){
+void procesarIngreso(Deposito &deposito, Lista &listaEstanteria, Lista &listaIndice, int idArticulo, float cantidad){
     //lo creo en el stack, despues no lo voy a usar.
     Indice indiceArticulo;
     indiceArticulo.codigoArticulo = idArticulo;
@@ -167,6 +167,74 @@ void procesarIngreso(Lista &listaEstanteria, Lista &listaIndice, int idArticulo,
     if (localizador == fin()) {
         //no se encontro el dato, entonces checkear ubicaciones disponibles sino crear calle.
         cout << "no se encontro el articulo.\n";
+        PtrNodoLista ptrNodoEstanteria = ultimo(listaEstanteria);
+        PtrNodoLista ptrNodoPiso = ultimo(getListaPisos(*(Estanteria*)ptrNodoEstanteria->ptrDato));
+        PtrNodoLista ptrNodoUbicacion = ultimo(getListaUbicacion((*(Piso*)ptrNodoPiso->ptrDato)));
+        
+        Articulo* ptrArticulo = new Articulo;
+        constructor(*ptrArticulo);
+        setCodigoArticulo(*ptrArticulo, idArticulo);
+        
+        
+        if ( ((Ubicacion*)ptrNodoUbicacion->ptrDato)->nroUbicacion < deposito.cUbicaciones ) {
+            //crear la ubicaion faltante y completar
+            int nroUbicacion = ((Ubicacion*)ptrNodoUbicacion->ptrDato)->nroUbicacion + 1;
+            
+            PtrNodoLista ptrNodoNuevaUbicacion = crearUbicacion(getListaUbicacion((*(Piso*)ptrNodoPiso->ptrDato)), nroUbicacion, *ptrArticulo);
+            
+            setCantidad(*(Ubicacion*)ptrNodoNuevaUbicacion->ptrDato, cantidad);
+            //guardar lista indice - no es un tda entonces no llamo al constructor
+            Indice* indice = new Indice;
+            indice->c = getNroCalle((*(Estanteria*)ptrNodoEstanteria->ptrDato));
+            indice->p = getNroPisos((*(Piso*)ptrNodoPiso->ptrDato));
+            indice->u = getNroUbicacion(*(Ubicacion*)ptrNodoNuevaUbicacion->ptrDato);
+            indice->codigoArticulo = idArticulo;
+            
+            adicionarFinal(listaIndice, indice);
+            
+        } else if( ((Ubicacion*)ptrNodoUbicacion->ptrDato)->nroUbicacion == deposito.cUbicaciones ) {
+            
+            if( ((Piso*)ptrNodoPiso->ptrDato)->nroPiso < deposito.cPisos ) {
+                
+                //crear el piso faltante y la ubicacion y completar
+                int nroPiso = ((Piso*)ptrNodoPiso->ptrDato)->nroPiso + 1;
+                int nroUbicacion = ((Ubicacion*)ptrNodoUbicacion->ptrDato)->nroUbicacion + 1;
+                
+                PtrNodoLista ptrNodoNuevoPiso = crearPiso(getListaPisos((*(Estanteria*)ptrNodoEstanteria->ptrDato)), nroPiso);
+                
+                PtrNodoLista ptrNodoNuevaUbicacion = crearUbicacion(getListaUbicacion((*(Piso*)ptrNodoNuevoPiso->ptrDato)), nroUbicacion, *ptrArticulo);
+                
+                Indice* indice = new Indice;
+                indice->c = getNroCalle((*(Estanteria*)ptrNodoEstanteria->ptrDato));
+                indice->p = getNroPisos((*(Piso*)ptrNodoNuevoPiso->ptrDato));
+                indice->u = getNroUbicacion(*(Ubicacion*)ptrNodoNuevaUbicacion->ptrDato);
+                indice->codigoArticulo = idArticulo;
+                
+                adicionarFinal(listaIndice, indice);
+            
+            } else if( ((Piso*)ptrNodoPiso->ptrDato)->nroPiso == deposito.cPisos ) {
+                //crear calle, crear piso crear ubicacion y completar
+                int nroCalle = ((Estanteria*)ptrNodoEstanteria->ptrDato)->nroCalle + 1;
+                int nroPiso = 1;
+                int nroUbicacion = 1;
+                
+                PtrNodoLista ptrNodoNuevaEstanteria = crearEstanteria(listaEstanteria, nroCalle);
+                
+                PtrNodoLista ptrNodoNuevoPiso = crearPiso(getListaPisos((*(Estanteria*)ptrNodoNuevaEstanteria->ptrDato)), nroPiso);
+                
+                PtrNodoLista ptrNodoNuevaUbicacion = crearUbicacion(getListaUbicacion((*(Piso*)ptrNodoNuevoPiso->ptrDato)), nroUbicacion, *ptrArticulo);
+            
+                Indice* indice = new Indice;
+                indice->c = nroCalle;
+                indice->p = nroPiso;
+                indice->u = nroUbicacion;
+                indice->codigoArticulo = idArticulo;
+                
+                adicionarFinal(listaIndice, indice);
+                
+            }
+        
+        }
     }
     else {
         //se encontro, entonces almaceno
