@@ -30,7 +30,7 @@ void estadoUbicaciones(Lista &listaUbicacion){
     cursor=primero(listaUbicacion);
 
     while (cursor != fin()){
-        
+
         int nroUbicacion= getNroUbicacion(*((Ubicacion*)cursor->ptrDato));
         cout<<"------------------------------------------------"<<endl;
         cout<<"Nro. Ubicacion: "<<nroUbicacion<<endl;
