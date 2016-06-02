@@ -1,14 +1,8 @@
-#include <cstdlib>;
-#include <iostream>;
-#include <string>;
+#ifndef CAMION_H
+#define CAMION_H
+#include "Pila.h"
 
 using namespace std;
-
-#ifndef __CAMION_H__
-#define __CAMION_H__
-#ifndef NULL
-#define NULL 0
-#endif
 
 /******************************************************************************/
 
@@ -18,13 +12,12 @@ using namespace std;
 
 /* Tipo de Informacion que esta contenida en una plataforma*/
 
-typedef struct{	
+typedef struct{
 	int nroCamion;
 	float kgCapacidad;
 	float cargaTotal;
-	float porcentajeOcupado;	
-	Pila pilaSolicitudes;	
-	
+	float porcentajeOcupado;
+
 } Camion;
 
 /******************************************************************************/
@@ -106,21 +99,6 @@ void setCargaTotal(Camion &camion, float dato);
 
 /**
 PRE:
-    La instancia del TDA (camion) debe haberse creado con anterioridad y nunca se ejecutó la primitiva destruir sobre esta instancia.
-POST:
-    Actualizo pilaSolicitudes asignandole pilaNueva
-PARAMETROS:
-    camion: instancia sobre la cual se aplica la primitiva.
-    pilaNueva: Actualizo la pilaSolicitudes.
-RETORNO:
-    No aplica.
-*/
-
-void setPilaSolicitudes(Camion &camion, Pila pilaNueva);
-
-
-/**
-PRE:
     La instancia del TDA (camion) debe haberse creado con anterioridad (primitiva crear) y nunca se ejecutó la primitiva destruir sobre esta instancia.
 POST:
     devuelve el Numero de Camion
@@ -145,7 +123,6 @@ RETORNO:
 */
 
 float getKGcapacidad(Camion &camion);
-
 
 /**
 PRE:
@@ -172,8 +149,12 @@ RETORNO:
    	Pila de solicitudes.
 */
 
-Pila getPilaSolicitudes(Camion &camion);
+float getPorcentajeCarga(Camion &camion);
+
+void setPorcentajeCarga(Camion &camion, float porcentaje);
+
+
 
 float calcularPorcentajeOcupado(Camion &camion);
 
-#endif
+#endif // CAMION_H
