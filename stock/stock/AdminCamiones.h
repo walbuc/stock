@@ -1,17 +1,16 @@
-#ifndef AdminCamiones_h
-#define AdminCamiones_h
-
-#include <stdio.h>
-#include "funciones.h"
-#include "lista.h"
+#ifndef ADMINCAMIONES_H
+#define ADMINCAMIONES_H
+#include "Lista.h"
 #include "Camion.h"
-#include "Solicitud.h"
+#include "Deposito.h"
 
+void configurarKcCamion(Camion &camion,float kc);
 
-#endif /* AdminCamiones_h */
+void cargarCamiones(Deposito &deposito, Lista &listaSolicitudes, Lista &listaCamiones);
 
-
-
-void cargarCamiones(Lista &listaSolicitudes, Lista &listaCamiones);
+void listarCamiones (Lista &listaCamiones);
 
 void utilizacionCamiones(Lista &listaCamiones);
+
+
+#endif // ADMINCAMIONES_H
