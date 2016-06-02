@@ -9,24 +9,14 @@
 #include "solicitud.h"
 #include "funciones.h"
 
+PtrNodoLista crearSolicitud(Lista &listaSolicitudes,int idSucursal, int idArticuloSucursal, float cantidadSucursal, float cantidadCumplida);
 
-void cargarSolicitudes(Lista &listaSolicitudes);
+PtrNodoCola crearPendiente(Cola &colaPendiente, int idSucursal, int idArticuloSucursal, float cantidadSucursal, float cantidadCumplida);
 
-void cargarMaestroDeSolicitudes(Lista &listaSolicitudes, Lista &listaIndice);
+void estadoListaSolicitud(Lista &listaSolicitud);
 
-/* verifica el stock de un determinado articulo*/
-bool existeArticulo();
+void estadoColaPendiente(Cola &colaPendiente);
 
-/*verifica la existencia del articulo*/
-bool existeStockArticulo();
-
-/* si el articulo no cumple con la totalidad o la parcialidad
-de las 2 condiciones anteriores,
-carga el articulo en la cola de articulos pendientes */
-void agregarPendiente(Cola &colaPendientes, PtrDato ptrDato);
-
-/* en caso contrario,
-carga el articulo en la lista de pedido */
-void agregarSolicitud();
+void imprimirSolicitud(Solicitud &solicitud);
 
 #endif /* AdminSolicitud_h */
