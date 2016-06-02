@@ -29,7 +29,7 @@ void setArticulo (Ubicacion &ubicacion, Articulo articulo){
 
 float getCantidad (Ubicacion &ubicacion){
     return ubicacion.cantidad;
-    
+
 }
 
 void setCantidad (Ubicacion &ubicacion, float cantidad){
