@@ -1,7 +1,9 @@
-#include <stdio.h>
 #include "AdminCamiones.h"
-#include "fstream"
+#include <fstream>
 #include <iostream>
+#include <sstream>
+#include <string>
+#include <stdio.h>
 
 using namespace std;
 
@@ -19,21 +21,21 @@ void cargarCamiones(Lista &listaSolicitudes, Lista &listaCamiones)
 	cursorCamion = ultimo(listaCamiones); //trae el ultimo camion de la lista (primer camion)
 	
 	while (cursorSolicitud != fin()) { //lee la solicitud entrante
-		auxkg = getCantidadSolicitud(*(Solicitud*) cursorSolicitud->ptrdato; //kg de la solicitud
-		kgtotal = auxkg + getCargaTotal(*(Camion*) cursorCamion->ptrdato); //suma de la solicitud con la carga del camion 
-		if (kgtotal <= getKGcapacidad(*(Camion*) cursorCamion->ptrdato)){ // si no supera la capacidad total del camion actual
-			setCargaTotal(*(Camion*) cursorCamion->ptrdato, kgtotal); //guarda la carga en el camion
-			cursorSolicitud = siguiente(ListaSolicitudes, cursorSolicitud); //pasa al a siguiente solicitud
+		auxkg = getCantidadSolicitud(*(Solicitud*) cursorSolicitud->ptrDato); //kg de la solicitud
+		kgtotal = auxkg + getCargaTotal(*(Camion*) cursorCamion->ptrDato); //suma de la solicitud con la carga del camion 
+		if (kgtotal <= getKGcapacidad(*(Camion*) cursorCamion->ptrDato)){ // si no supera la capacidad total del camion actual
+			setCargaTotal(*(Camion*) cursorCamion->ptrDato, kgtotal); //guarda la carga en el camion
+			cursorSolicitud = siguiente(listaSolicitudes, cursorSolicitud); //pasa al a siguiente solicitud
 		}
 		else{ // si no entra en el camion
 		//crea nuevo camion
 			Camion* camion = new Camion;
 			crearCamion(*camion);
-			setNroCamion(*camion, (getNroCamion(*(Camion*) cursorCamion->ptrdato)+1));//sumo 1 al id
+			setNroCamion(*camion, (getNroCamion(*(Camion*) cursorCamion->ptrDato)+1));//sumo 1 al id
 			adicionarFinal(listaCamiones, camion);
 			cursorCamion = ultimo(listaCamiones); //trae el ultimo camion de la lista (camion nuevo)
-			setCargaTotal(*(Camion*) cursorCamion->ptrdato, auxkg); //mete la carga de la solicitud que no entro en el camion anterior
-			cursorSolicitud = siguiente(ListaSolicitudes, cursorSolicitud); //pasa a la siguiente solicitud
+			setCargaTotal(*(Camion*) cursorCamion->ptrDato, auxkg); //mete la carga de la solicitud que no entro en el camion anterior
+			cursorSolicitud = siguiente(listaSolicitudes, cursorSolicitud); //pasa a la siguiente solicitud
 		}
 	}
 }
@@ -55,17 +57,17 @@ void listarCamiones (Lista &listaCamiones)
 }
 */
 void utilizacionCamiones(Lista &listaCamiones) {
-    PtrNodoLista cursorCamiones = ultimo(listaCamiones);
+    PtrNodoLista cursorCamion = ultimo(listaCamiones);
 	FILE *pf;
     if ((pf = fopen("UtilizacionCamiones.txt", "w")) == NULL) {
         cout << "Error al abrir el fichero de aplicaciones" << endl;
     }
 
-    while (cursorCamiones != fin()) {
-        fprintf(pf, "%d;%.3f;%.2f\n", getNroCamion(*(Camion*) cursorCamion->ptrdato), getCargaTotal(*(Camion*) cursorCamion->ptrdato),
-            calcularPorcentajeOcupacion(*(Camion*) cursorCamion->ptrdato);
+    while (cursorCamion != fin()) {
+        fprintf(pf, "%d;%.3f;%.2f\n", getNroCamion(*(Camion*) cursorCamion->ptrDato), getCargaTotal(*(Camion*) cursorCamion->ptrDato),
+            calcularPorcentajeOcupado(*(Camion*) cursorCamion->ptrDato));
 
-        cursorCamion = anterior(listaCamion, cursorCamion);
+        cursorCamion = anterior(listaCamiones, cursorCamion);
     }
     fclose(pf);
 }
