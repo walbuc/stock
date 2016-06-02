@@ -8,7 +8,7 @@ typedef struct {
     int nroUbicacion;
     float cantidad;
     Articulo articulo;
-    
+
 }Ubicacion;
 
 void construirUbicacion(Ubicacion &ubicacion);
