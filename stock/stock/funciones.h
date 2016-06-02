@@ -3,7 +3,7 @@
 //  stock
 //
 //  Created by Walter Buczacka on 5/15/16.
-//  Copyright Â© 2016 Walter Buczacka. All rights reserved.
+//  Copyright © 2016 Walter Buczacka. All rights reserved.
 //
 
 #ifndef funciones_h
@@ -28,6 +28,10 @@ ResultadoComparacion compararDatoEstanteria(PtrDato ptrDato1, PtrDato ptrDato2);
 ResultadoComparacion compararDatoPiso(PtrDato ptrDato1, PtrDato ptrDato2);
 
 ResultadoComparacion compararDatoUbicacion(PtrDato ptrDato1, PtrDato ptrDato2);
+
+ResultadoComparacion compararDatoSolicitud(PtrDato ptrDato1, PtrDato ptrDato2);
+
+ResultadoComparacion compararDatoCamion(PtrDato ptrDato1, PtrDato ptrDato2);
 
 int cadenaAentero(string dato);
 
