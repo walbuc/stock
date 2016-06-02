@@ -1,17 +1,29 @@
-#include <string>
+#ifndef SOLICITUD_H
+#define SOLICITUD_H
 
+
+
+
+#include <string>
+using namespace std;
 
 /* Tipo de Estructura solicitud. */
-struct Solicitud {
+typedef struct  {
+    int idSolicitud;
     int codigoSucursal;
 	int codigoArticulo;
 	float cantidad;
+	float cantidadCumplida;
 	string hora;
-};
+}Solicitud;
 
-void constructor(Solicitud &solicitud);
+void constructorSolicitud(Solicitud &solicitud);
 
-void destructor(Solicitud &solicitud);
+void destructorSolicitud(Solicitud &solicitud);
+
+int getIdSolicitud(Solicitud &solicitud);
+
+void setIdSolicitud(Solicitud &solicitud, int idSolicitud);
 
 int getCodigoSucursal(Solicitud &solicitud);
 
@@ -25,8 +37,13 @@ float getCantidadSolicitud(Solicitud &solicitud);
 
 void setCantidadSolicitud(Solicitud &solicitud, float cantidad);
 
+float getCantidadCumplida(Solicitud &solicitud);
+
+void setCantidadCumplida(Solicitud &solicitud, float cantidad);
+
+
 string getHoraSolicitud(Solicitud &solicitud);
 
 void setHoraSolicitud(Solicitud &solicitud, string hora);
 
-
+#endif // SOLICITUD_H
