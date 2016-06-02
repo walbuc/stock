@@ -1,73 +1,104 @@
 #include "AdminCamiones.h"
+#include "Solicitud.h"
+#include "AdminSolicitudes.h"
+#include "Funciones.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <stdio.h>
 
+
 using namespace std;
 
-void cargarCamiones(Lista &listaSolicitudes, Lista &listaCamiones)
-{
-	PtrNodoLista cursorSolicitud = primero(listaSolicitudes); //cursor para recorrer las solicitudes
-	PtrNodoLista cursorCamion; //cursor para recorrer los camiones
-	float auxkg, kgtotal;
-	
-	//creacion del primer camion
-	Camion* camion = new Camion;
-	crearCamion(*camion);
-	setNroCamion(*camion, 1);
-	adicionarFinal(listaCamiones, camion); //agrega a la lista de camiones
-	cursorCamion = ultimo(listaCamiones); //trae el ultimo camion de la lista (primer camion)
-	
-	while (cursorSolicitud != fin()) { //lee la solicitud entrante
-		auxkg = getCantidadSolicitud(*(Solicitud*) cursorSolicitud->ptrDato); //kg de la solicitud
-		kgtotal = auxkg + getCargaTotal(*(Camion*) cursorCamion->ptrDato); //suma de la solicitud con la carga del camion 
-		if (kgtotal <= getKGcapacidad(*(Camion*) cursorCamion->ptrDato)){ // si no supera la capacidad total del camion actual
-			setCargaTotal(*(Camion*) cursorCamion->ptrDato, kgtotal); //guarda la carga en el camion
-			cursorSolicitud = siguiente(listaSolicitudes, cursorSolicitud); //pasa al a siguiente solicitud
-		}
-		else{ // si no entra en el camion
-		//crea nuevo camion
-			Camion* camion = new Camion;
-			crearCamion(*camion);
-			setNroCamion(*camion, (getNroCamion(*(Camion*) cursorCamion->ptrDato)+1));//sumo 1 al id
-			adicionarFinal(listaCamiones, camion);
-			cursorCamion = ultimo(listaCamiones); //trae el ultimo camion de la lista (camion nuevo)
-			setCargaTotal(*(Camion*) cursorCamion->ptrDato, auxkg); //mete la carga de la solicitud que no entro en el camion anterior
-			cursorSolicitud = siguiente(listaSolicitudes, cursorSolicitud); //pasa a la siguiente solicitud
-		}
-	}
+void configurarKcCamion(Camion &camion,float kc){
+    crearCamion(camion);
+    setKGcapacidad(camion, kc);
 }
 
-//LISTAR CAMIONES EN PANTALLA
-/*
-void listarCamiones (Lista &listaCamiones) 
-{
-	PtrNodoLista cursorCamion = ultimo(listaCamiones); //cursor para recorrer los camiones
-	cout << "Nro Camion \t cargaTotal \t porcentaje Ocupacion" << endl;
-	while (cursorCamion != fin()) {
-		cout << getNroCamion(*(Camion*) cursorCamion->ptrdato) << "\t" << 
-		getCargaTotal(*(Camion*) cursorCamion->ptrdato) << "\t" << 
-		calcularPorcentajeOcupado(*(Camion*) cursorCamion->ptrdato) << endl;
-		cursorCamion = anterior(listaCamiones);
-		
-	}
+void cargarCamiones(Deposito &deposito, Lista &listaSolicitudes, Lista &listaCamiones){
+    float kc= deposito.kc;
+    Camion* punteroCamion= new Camion();
+    crearCamion(*punteroCamion);
 
-}
-*/
-void utilizacionCamiones(Lista &listaCamiones) {
-    PtrNodoLista cursorCamion = ultimo(listaCamiones);
-	FILE *pf;
-    if ((pf = fopen("UtilizacionCamiones.txt", "w")) == NULL) {
-        cout << "Error al abrir el fichero de aplicaciones" << endl;
+    ///configuro el 1er camion
+    if (longitud(listaCamiones)==0){
+        configurarKcCamion(*punteroCamion,kc);
+        setNroCamion(*punteroCamion, 1);
+        adicionarFinal(listaCamiones, punteroCamion);
+    }
+    ///cursor de la listaSolicitudes
+    PtrNodoLista cursorSolicitud;
+    cursorSolicitud=primero(listaSolicitudes);
+
+    Solicitud auxSolicitud;
+    constructorSolicitud(auxSolicitud);
+
+    PtrNodoLista cursorCamion;///cursorCamion
+
+
+    while (cursorSolicitud != fin()){
+
+        auxSolicitud= (*((Solicitud*)cursorSolicitud->ptrDato));
+        float kgSolicitud= getCantidadCumplida(auxSolicitud);
+        cursorCamion= ultimo(listaCamiones);
+        float total=getCargaTotal(*((Camion*)cursorCamion->ptrDato));
+        float suma= total+kgSolicitud;
+        if (suma<=kc){
+            setCargaTotal(*((Camion*)cursorCamion->ptrDato),suma);//piso la carga total;
+            float porcentaje= calcularPorcentajeOcupado(*((Camion*)cursorCamion->ptrDato));
+            setPorcentajeCarga(*((Camion*)cursorCamion->ptrDato), porcentaje);
+        }
+        else{
+            int id= getNroCamion(*((Camion*)cursorCamion->ptrDato));///guardo id de camion a despachar.
+            id=id+1;
+            cout<<"camion nuevo";
+            Camion* punteroCamion2= new Camion();
+            crearCamion(*punteroCamion2);
+            configurarKcCamion(*punteroCamion2,kc);
+            setNroCamion(*punteroCamion2, id);
+            setCargaTotal(*punteroCamion2,kgSolicitud);
+            float porcentaje= calcularPorcentajeOcupado(*punteroCamion2);
+            setPorcentajeCarga(*punteroCamion2, porcentaje);
+
+            adicionarFinal(listaCamiones,punteroCamion2);
+
+        }
+
+        cursorSolicitud=siguiente(listaSolicitudes,cursorSolicitud);
     }
 
-    while (cursorCamion != fin()) {
-        fprintf(pf, "%d;%.3f;%.2f\n", getNroCamion(*(Camion*) cursorCamion->ptrDato), getCargaTotal(*(Camion*) cursorCamion->ptrDato),
-            calcularPorcentajeOcupado(*(Camion*) cursorCamion->ptrDato));
 
-        cursorCamion = anterior(listaCamiones, cursorCamion);
-    }
-    fclose(pf);
 }
+
+void listarCamiones (Lista &listaCamiones)
+{
+	PtrNodoLista cursor;
+    cursor=primero(listaCamiones);
+
+    cout<<"------------------------------"<<endl;
+    cout<<"CAMIONES CARGADOS"<<endl;
+    cout<<"------------------------------"<<endl;
+
+    while (cursor != fin()){
+
+        //imprimirSolicitud(*((Solicitud*)cursor->ptrDato));
+         cout<<"-------------------------------------------------"<<endl;
+        cout<<"Nro CAMION: "<< getNroCamion(*((Camion*)cursor->ptrDato))<<endl;
+        cout<<"CARGA TOTAL: "<< getCargaTotal(*((Camion*)cursor->ptrDato))<<endl;
+        cout<<"Porcentaje Ocupacion: "<< getPorcentajeCarga(*((Camion*)cursor->ptrDato))<<endl;
+         cout<<"--------------------------------------------------"<<endl;
+
+
+        cursor=siguiente(listaCamiones,cursor);
+    }
+	}
+
+
+
+
+
+
+
+void utilizacionCamiones(Lista &listaCamiones){}
+
