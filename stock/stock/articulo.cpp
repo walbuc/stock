@@ -3,7 +3,7 @@
 //  stock
 //
 //  Created by Walter Buczacka on 5/14/16.
-//  Copyright Â© 2016 Walter Buczacka. All rights reserved.
+//  Copyright © 2016 Walter Buczacka. All rights reserved.
 //
 
 #include "articulo.h"
