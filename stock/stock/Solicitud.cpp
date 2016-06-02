@@ -9,17 +9,27 @@
 
 using namespace std;
 
-void constructor(Solicitud &solicitud)
+void constructorSolicitud(Solicitud &solicitud)
 {
+    solicitud.idSolicitud=0;
     solicitud.codigoSucursal = 0;
 	solicitud.codigoArticulo = 0;
     solicitud.cantidad = 0.0;
+    solicitud.cantidadCumplida=0.0;
 	solicitud.hora = "";
 }
 
 
-void destructor(Solicitud &solicitud)
+void destructorSolicitud(Solicitud &solicitud)
 {
+}
+
+int getIdSolicitud(Solicitud &solicitud){
+    return solicitud.idSolicitud;
+}
+
+void setIdSolicitud(Solicitud &solicitud, int idSolicitud){
+    solicitud.idSolicitud=idSolicitud;
 }
 
 int getCodigoSucursal(Solicitud &solicitud)
@@ -29,7 +39,7 @@ int getCodigoSucursal(Solicitud &solicitud)
 
 void setCodigoSucursal(Solicitud &solicitud, int codigoSucursal)
 {
-	if (codigoSucursal >= 0) 
+	if (codigoSucursal >= 0)
 	{
 		solicitud.codigoSucursal = codigoSucursal;
 	}
@@ -42,7 +52,7 @@ int getCodigoArticulo(Solicitud &solicitud)
 
 void setCodigoArticulo(Solicitud &solicitud, int codigoArticulo)
 {
-	if (codigoArticulo >= 0) 
+	if (codigoArticulo >= 0)
 	{
 		solicitud.codigoArticulo = codigoArticulo;
 	}
@@ -55,11 +65,20 @@ float getCantidadSolicitud(Solicitud &solicitud)
 
 void setCantidadSolicitud(Solicitud &solicitud, float cantidad)
 {
-	if (cantidad >= 0) 
+	if (cantidad >= 0)
 	{
 		solicitud.cantidad = cantidad;
 	}
 }
+
+float getCantidadCumplida(Solicitud &solicitud){
+return solicitud.cantidadCumplida;
+}
+
+void setCantidadCumplida(Solicitud &solicitud, float cantidad){
+solicitud.cantidadCumplida=cantidad;
+}
+
 
 string getHoraSolicitud(Solicitud &solicitud)
 {
