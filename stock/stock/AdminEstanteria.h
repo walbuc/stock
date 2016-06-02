@@ -18,7 +18,4 @@ void imprimirUbicacion(Ubicacion &ubicacion);
 void estadoEstanteria(Lista &listaEstanteria);
 
 
-
-
-
 #endif // ADMINESTANTERIA_H
