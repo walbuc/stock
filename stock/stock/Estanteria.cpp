@@ -134,21 +134,21 @@ PtrNodoLista crearUbicacion(Lista &listaUbicacion, int nroUbicacion, Articulo &a
 
     Ubicacion* punteroUbicacion = new Ubicacion();
     construirUbicacion(*punteroUbicacion);
-    
+
     setNroUbicacion(*punteroUbicacion, nroUbicacion);
     setArticulo(*punteroUbicacion, articulo);
-    
+
     PtrNodoLista ptrNodo = adicionarFinal(listaUbicacion, punteroUbicacion);
     return ptrNodo;
-    
+
     }
 
 PtrNodoLista crearEstanteria(Lista &listaEstanteria, int nroCalle){
-    
+
     Estanteria* punteroEstanteria = new Estanteria();
     construirEstanteria(*punteroEstanteria);
     setNroCalle(*punteroEstanteria, nroCalle);
-    
+
     PtrNodoLista prtNodo = adicionarFinal(listaEstanteria, punteroEstanteria);
 
     return prtNodo;
