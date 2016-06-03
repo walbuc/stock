@@ -90,6 +90,7 @@ ResultadoComparacion compararDatoSolicitud(PtrDato ptrDato1, PtrDato ptrDato2) {
   return IGUAL;
     }
 }
+
 ResultadoComparacion compararDatoCamion(PtrDato ptrDato1, PtrDato ptrDato2) {
     if ( ((Camion*)ptrDato1)->nroCamion > ((Camion*)ptrDato2)->nroCamion ) {
         return MAYOR;
@@ -102,12 +103,6 @@ ResultadoComparacion compararDatoCamion(PtrDato ptrDato1, PtrDato ptrDato2) {
   return IGUAL;
     }
 }
-
-
-
-
-
-
 
 
 //////////////////////////////////////////////
@@ -195,3 +190,111 @@ string quitar_espacios(string cadena){
     return cadena.substr(inicio_pos, longitud);
 
 }
+
+///////////////////////////////////////////
+////FUNCIONES PARA LIBERAR MEMORIA////////
+//////////////////////////////////////////
+
+void eliminarListaAriticulos(Lista &listaArticulos){
+
+     if(!listaVacia(listaArticulos)){
+        PtrNodoLista nodo = primero(listaArticulos);
+        Articulo* articulo = (Articulo*) nodo->ptrDato;
+        destructor(*articulo);
+        delete articulo;
+
+        nodo = siguiente(listaArticulos, nodo);
+        while(nodo != fin()){
+            articulo = (Articulo*) nodo->ptrDato;
+            destructor(*articulo);
+            delete articulo;
+
+            nodo = siguiente(listaArticulos, nodo);
+        }
+     }
+}//fin void elimina articulos
+
+void eliminarListaEstanteria(Lista &listaEstanteria){
+
+     if(!listaVacia(listaEstanteria)){
+        PtrNodoLista nodo = primero(listaEstanteria);
+        Estanteria* estanteria = (Estanteria*) nodo->ptrDato;
+        destruirEstanteria(*estanteria);
+        delete estanteria;
+
+        nodo = siguiente(listaEstanteria, nodo);
+        while(nodo != fin()){
+            estanteria = (Estanteria*) nodo->ptrDato;
+            destruirEstanteria(*estanteria);
+            delete estanteria;
+
+            nodo = siguiente(listaEstanteria, nodo);
+        }
+     }
+}//fin void elimina estanterias
+
+void eliminarListaIndice(Lista &listaIndice){
+
+     if(!listaVacia(listaIndice)){
+        PtrNodoLista nodo = primero(listaIndice);
+        Indice* indice = (Indice*) nodo->ptrDato;
+        delete indice;
+
+        nodo = siguiente(listaIndice, nodo);
+        while(nodo != fin()){
+            indice = (Indice*) nodo->ptrDato;
+            delete indice;
+
+            nodo = siguiente(listaIndice, nodo);
+        }
+     }
+}//fin void elimina estanterias
+void eliminarListaSolicitud(Lista &listaSolicitud){
+
+     if(!listaVacia(listaSolicitud)){
+        PtrNodoLista nodo = primero(listaSolicitud);
+        Solicitud* solicitud = (Solicitud*) nodo->ptrDato;
+        destructorSolicitud(*solicitud);
+        delete solicitud;
+
+        nodo = siguiente(listaSolicitud, nodo);
+        while(nodo != fin()){
+            solicitud = (Solicitud*) nodo->ptrDato;
+            destructorSolicitud(*solicitud);
+            delete solicitud;
+
+            nodo = siguiente(listaSolicitud, nodo);
+        }
+     }
+}//fin void elimina estanterias
+void eliminarListaCamiones(Lista &listaCamiones){
+
+     if(!listaVacia(listaCamiones)){
+        PtrNodoLista nodo = primero(listaCamiones);
+        Camion* camion = (Camion*) nodo->ptrDato;
+        destruirCamion(*camion);
+        delete camion;
+
+        nodo = siguiente(listaCamiones, nodo);
+        while(nodo != fin()){
+            camion = (Camion*) nodo->ptrDato;
+            destruirCamion(*camion);
+            delete camion;
+
+            nodo = siguiente(listaCamiones, nodo);
+        }
+     }
+}//fin void elimina estanterias
+void eliminarColas(Cola &colaPendiente){
+     while(!colaVacia(colaPendiente)){
+
+       Solicitud* ptrSolicitud = (Solicitud*) desencolar(colaPendiente);
+       destructorSolicitud(*ptrSolicitud);
+
+       delete ptrSolicitud;
+     }
+}//fin void elimina colas
+
+
+
+
