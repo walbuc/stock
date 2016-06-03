@@ -11,6 +11,7 @@
 
 #include "articulo.h"
 #include "lista.h"
+#include "Cola.h"
 #include "estanteria.h"
 #include "Ubicacion.h"
 #include <string>
@@ -38,5 +39,23 @@ int cadenaAentero(string dato);
 float cadenaAfloat(string dato);
 
 char cadenaACaracter(string dato);
+
+///////////////////////////////////////////
+////FUNCIONES PARA LIBERAR MEMORIA////////
+//////////////////////////////////////////
+
+void eliminarListaAriticulos(Lista &listaArticulos);
+
+void eliminarListaEstanteria(Lista &listaEstanteria);
+
+void eliminarListaIndice(Lista &listaIndice);
+
+void eliminarListaSolicitud(Lista &listaSolicitud);
+
+void eliminarListaCamiones(Lista &listaCamiones);
+
+void eliminarColas(Cola &colaPendiente);
+
+
 
 #endif /* funciones_h */
