@@ -223,11 +223,67 @@ void escribirVentas(Lista &listaSolicitud){
 
 
 
+void ordenarListaCamion(Lista &listaCamiones){
+
+    Lista auxLista;
+    crearLista(auxLista,compararDatoCamion);
+
+    Camion* ptrCamion1;
+    Camion* ptrAuxCamion;
+    PtrNodoLista cursor1= primero(listaCamiones);///tomamos el 1er elemento en cursor1 de listaCamiones
+    PtrNodoLista cursor2;
+
+
+    while (cursor1!= fin()){///while para recorrer la listaCamiones
+
+        ptrCamion1=(Camion*)cursor1->ptrDato;
+        int idCamion1=getNroCamion(*ptrCamion1);
+
+        if (listaVacia(auxLista)){
+            adicionarPrincipio(auxLista,ptrCamion1);
+           }
+        else {
+
+            ///tomamos 1er elemento en cursor2 de lista aux!
+            cursor2=primero(auxLista);
+            bool seguir=true;
+
+            while (seguir==true){///while para recorrer la lista auxiliar e ir comparando
+
+                    ptrAuxCamion=(Camion*)cursor2->ptrDato;
+
+                    int idCamionAux=getNroCamion(*ptrAuxCamion);
+                    if (idCamion1>=idCamionAux){///si el idCamion es mayor al aux que esta comparando se agrega antes
+
+                        adicionarPrincipio(auxLista,ptrCamion1);
+                        seguir=false;
+                    }
+                    else{
+                    cursor2= siguiente(auxLista,cursor2);
+                    if (cursor2== fin()){
+                        adicionarFinal(auxLista,ptrCamion1);
+
+                        seguir=false;
+                        }
+                    }
+                    cursor2= siguiente(auxLista,cursor2);
+
+            }///fin while2
+
+        }///else1
+
+         cursor1=siguiente(listaCamiones,cursor1);
+
+    }///fin while1
+
+    listaCamiones=auxLista;///pisamos la lista por la listaAux ordenada desc
+}
 
 
 
 
 void utilizacionDeCamiones(Lista &listaCamiones){
+     ordenarListaCamion(listaCamiones); 
     PtrNodoLista cursor;
     cursor=primero(listaCamiones);
     ofstream fUtilizacionCamiones("UtilizacionDeCamiones.txt");
