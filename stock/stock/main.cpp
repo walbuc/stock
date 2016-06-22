@@ -44,7 +44,7 @@ int main(int argc, const char * argv[]) {
     leerArchivosOperaciones(deposito, getListaEstanteria(deposito), listaIndice,listaSolicitud,colaPendientes);
 
 
-    procesarPendientes(deposito,getListaEstanteria(deposito),listaIndice,listaSolicitud,colaPendientes);
+    //procesarPendientes(deposito,getListaEstanteria(deposito),listaIndice,listaSolicitud,colaPendientes);
     cargarCamiones(deposito,listaSolicitud,listaCamiones);
     int opcion;
 
