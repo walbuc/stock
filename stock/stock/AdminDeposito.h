@@ -11,5 +11,6 @@ void saldosDetallados (Deposito &deposito);
 void saldosAgrupados (Deposito &deposito);
 void escribirFaltantes(Cola &colaPendiente);
 void escribirVentas(Lista &listaSolicitud);
+void ordenarListaCamion(Lista &listaCamiones);
 void utilizacionDeCamiones(Lista &listaCamiones);
 #endif // ADMINDEPOSITO_H
